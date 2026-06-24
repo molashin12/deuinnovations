@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeuInnovation — Portfolio</title>
+    <script>
+      (function () {
+        try {
+          const savedTheme = localStorage.getItem('deu-theme');
+          if (savedTheme === 'light' || savedTheme === 'dark') {
+            document.documentElement.classList.remove('light', 'dark');
+            document.documentElement.classList.add(savedTheme);
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <style id="theme-vars">
+:root,
+.light {
+  --deu-bg: #f2f0ea;
+  --deu-surface: #f6f4ee;
+  --deu-surface-2: #ece8df;
+  --deu-surface-3: #e2ddd2;
+  --deu-panel: rgba(17, 17, 18, 0.035);
+  --deu-panel-strong: rgba(17, 17, 18, 0.06);
+  --deu-ink: #151619;
+  --deu-foreground: #151619;
+  --deu-ink-2: rgba(21, 22, 25, 0.74);
+  --deu-ink-3: rgba(21, 22, 25, 0.44);
+  --deu-line: rgba(21, 22, 25, 0.1);
+  --deu-line-strong: rgba(21, 22, 25, 0.16);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFD633;
+  --deu-primary-soft: rgba(255, 204, 0, 0.18);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+  --deu-oxblood: #DD0000;
+  --deu-shadow-1: 0 18px 40px rgba(15, 17, 21, 0.07);
+  --deu-shadow-2: 0 30px 70px rgba(15, 17, 21, 0.08);
+  --deu-radius-sm: 4px;
+  --deu-radius-md: 8px;
+  --deu-radius-lg: 16px;
+  --deu-radius-pill: 999px;
+  --deu-max-width: 1360px;
+  --deu-font-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --deu-font-display: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.dark {
+  --deu-bg: #0e0f10;
+  --deu-surface: #151618;
+  --deu-surface-2: #1c1e21;
+  --deu-surface-3: #25282c;
+  --deu-panel: rgba(255, 255, 255, 0.035);
+  --deu-panel-strong: rgba(255, 255, 255, 0.07);
+  --deu-ink: #f6f2e8;
+  --deu-foreground: #f6f2e8;
+  --deu-ink-2: rgba(246, 242, 232, 0.78);
+  --deu-ink-3: rgba(246, 242, 232, 0.5);
+  --deu-line: rgba(246, 242, 232, 0.1);
+  --deu-line-strong: rgba(246, 242, 232, 0.17);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFE066;
+  --deu-primary-soft: rgba(255, 204, 0, 0.2);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+}
+
+body {
+  font-family: var(--deu-font-body);
+  background: var(--deu-bg);
+  color: var(--deu-ink);
+}
+
+.deu-display {
+  font-family: var(--deu-font-display);
+  font-size: clamp(3rem, 6vw, 6.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.deu-h1 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+}
+
+.deu-h2 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(1.55rem, 2.1vw, 2.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.deu-h3 {
+  font-family: var(--deu-font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.deu-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.deu-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.deu-caption {
+  font-size: 0.81rem;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-foreground: var(--deu-foreground);
+    --color-primary: var(--deu-primary);
+  }
+  @layer base {
+    body { background: var(--deu-surface); color: var(--deu-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <header class="sticky top-0 z-50 pt-3 sm:pt-4">
+            <div class="portfolio-shell">
+                <div class="portfolio-floating-nav">
+                    <div class="portfolio-topbar">
+                        <a href="./index.html" class="portfolio-brand flex min-w-0 items-center gap-3 text-[var(--deu-ink)]" aria-label="DeuInnovation home">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] text-sm font-semibold tracking-[0.18em] text-[var(--deu-primary)]">DI</span>
+                            <span class="portfolio-brand-copy">
+                                <span class="portfolio-brand-meta">Selected work / Portfolio</span>
+                                <span class="deu-h3 truncate">DeuInnovation</span>
+                            </span>
+                        </a>
+                        <div class="portfolio-header-actions">
+                            <div class="portfolio-auth-links" aria-label="Account links">
+                                <a href="#contact" class="portfolio-auth-link">Login</a>
+                                <a href="#contact" class="portfolio-auth-link portfolio-auth-link--primary">Sign up</a>
+                            </div>
+                            <button type="button" class="portfolio-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">
+                                <span class="portfolio-theme-toggle__track" aria-hidden="true">
+                                    <span class="portfolio-theme-toggle__thumb"></span>
+                                    <span class="portfolio-theme-toggle__glyph portfolio-theme-toggle__glyph--sun">
+                                        <i data-lucide="sun-medium" class="h-3.5 w-3.5"></i>
+                                    </span>
+                                    <span class="portfolio-theme-toggle__glyph portfolio-theme-toggle__glyph--moon">
+                                        <i data-lucide="moon-star" class="h-3.5 w-3.5"></i>
+                                    </span>
+                                </span>
+                                <span class="portfolio-theme-toggle__label" data-theme-label>Light</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-nav-lower">
+                        <span class="portfolio-nav-kicker">Showcase navigation</span>
+                        <nav class="portfolio-subnav no-scrollbar" aria-label="Portfolio sections">
+                            <a href="./index.html" class="portfolio-subnav-link">Home</a>
+                            <a href="#featured" class="portfolio-subnav-link">Featured</a>
+                            <a href="#showcase" aria-current="page" class="portfolio-subnav-link is-active">Portfolio</a>
+                            <a href="#contact" class="portfolio-subnav-link">Contact</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="relative overflow-hidden border-b border-[var(--deu-line)]">
+            <div class="portfolio-aura"></div>
+            <div class="portfolio-shell relative py-16 lg:py-24">
+                <div class="grid gap-10 lg:grid-cols-[minmax(0,6.3fr)_minmax(18rem,5fr)] lg:items-end">
+                    <div class="flex flex-col gap-7" data-reveal>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="portfolio-badge">Selected client work</span>
+                            <span class="portfolio-badge portfolio-badge--subtle">Straightforward portfolio preview</span>
+                        </div>
+                        <div class="flex flex-col gap-5">
+                            <h1 class="deu-display max-w-[11ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Portfolio work shaped for real products and operating systems.</h1>
+                            <p class="deu-body-lg max-w-[42rem] text-[var(--deu-ink-2)]">This page is a clearer view into previous client-facing concepts and product directions. It puts project previews first, keeps browsing obvious, and still holds the calm, premium studio language that defines the rest of the draft site.</p>
+                        </div>
+                        <div class="grid gap-4 sm:grid-cols-3">
+                            <article class="portfolio-mini-panel">
+                                <span class="portfolio-mini-label">Featured strip</span>
+                                <p class="deu-body text-[var(--deu-ink)]">Three lead preview blocks for fast orientation.</p>
+                            </article>
+                            <article class="portfolio-mini-panel">
+                                <span class="portfolio-mini-label">Showcase rows</span>
+                                <p class="deu-body text-[var(--deu-ink)]">Six scan-friendly project entries with visible outcomes.</p>
+                            </article>
+                            <article class="portfolio-mini-panel">
+                                <span class="portfolio-mini-label">Preview logic</span>
+                                <p class="deu-body text-[var(--deu-ink)]">Abstract UI frames replace photography and decorative imagery.</p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-4" data-reveal>
+                        <div class="portfolio-hero-frame">
+                            <div class="preview-chrome">
+                                <div class="preview-dots" aria-hidden="true">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="preview-kicker">Portfolio navigator</span>
+                            </div>
+                            <div class="preview-surface preview-surface--hero">
+                                <div class="preview-hero-rail">
+                                    <span class="preview-block preview-block--accent"></span>
+                                    <span class="preview-block"></span>
+                                    <span class="preview-block preview-block--soft"></span>
+                                    <span class="preview-block"></span>
+                                </div>
+                                <div class="preview-hero-main">
+                                    <div class="preview-hero-stage">
+                                        <div class="preview-stat-grid">
+                                            <span class="preview-block preview-block--strong"></span>
+                                            <span class="preview-block"></span>
+                                            <span class="preview-block preview-block--soft"></span>
+                                        </div>
+                                        <div class="preview-wave"></div>
+                                        <div class="preview-grid-lines preview-grid-lines--three">
+                                            <span></span><span></span><span></span>
+                                        </div>
+                                    </div>
+                                    <div class="preview-hero-stack">
+                                        <div class="preview-card-lineup">
+                                            <span class="preview-block preview-block--tall"></span>
+                                            <span class="preview-block"></span>
+                                        </div>
+                                        <div class="preview-list-lines">
+                                            <span></span><span></span><span></span><span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div class="portfolio-note-card">
+                                <span class="portfolio-mini-label">Use the page to browse</span>
+                                <p class="deu-body text-[var(--deu-ink)]">Featured work comes first, then the main case-study rows.</p>
+                            </div>
+                            <div class="portfolio-note-card">
+                                <span class="portfolio-mini-label">Tone stays premium</span>
+                                <p class="deu-body text-[var(--deu-ink)]">Long horizontal lines, restrained accent use, and framed preview surfaces.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="featured" class="border-b border-[var(--deu-line)]">
+            <div class="portfolio-shell py-16 lg:py-24">
+                <div class="portfolio-section-intro" data-reveal>
+                    <div class="flex flex-col gap-4">
+                        <span class="portfolio-eyebrow">Featured work strip</span>
+                        <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Three lead projects, each anchored by a stronger preview composition.</h2>
+                    </div>
+                    <p class="deu-body-lg max-w-[40rem] text-[var(--deu-ink-2)]">The opening strip makes it immediately clear where someone would start browsing previous work. Each block shows a different product context and a different preview rhythm.</p>
+                </div>
+
+                <div class="featured-grid mt-10 no-scrollbar">
+                    <article class="featured-card featured-card--lead" data-reveal>
+                        <div class="featured-copy">
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <span class="portfolio-kicker">AI operations dashboard</span>
+                                <span class="portfolio-inline-tag">Service operations</span>
+                            </div>
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Control room for live service delivery and AI-assisted triage.</h3>
+                            <p class="deu-body text-[var(--deu-ink-2)]">A platform preview built to make dispatch, team health, and exception handling immediately readable for busy operational teams.</p>
+                        </div>
+                        <div class="preview-frame">
+                            <div class="preview-chrome">
+                                <div class="preview-dots" aria-hidden="true">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="preview-kicker">Live dashboard</span>
+                            </div>
+                            <div class="preview-surface preview-surface--dashboard">
+                                <div class="preview-sidebar-stack">
+                                    <span class="preview-block preview-block--accent"></span>
+                                    <span class="preview-block"></span>
+                                    <span class="preview-block preview-block--soft"></span>
+                                    <span class="preview-block"></span>
+                                </div>
+                                <div class="preview-main-stack">
+                                    <div class="preview-stat-grid">
+                                        <span class="preview-block preview-block--strong"></span>
+                                        <span class="preview-block"></span>
+                                        <span class="preview-block preview-block--soft"></span>
+                                    </div>
+                                    <div class="preview-chart-row">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="preview-table-lines">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="featured-card" data-reveal>
+                        <div class="featured-copy">
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <span class="portfolio-kicker">Multilingual learning platform</span>
+                                <span class="portfolio-inline-tag">Education</span>
+                            </div>
+                            <h3 class="deu-h3 text-[var(--deu-ink)]">Course flow, language switching, and progress design in one clean frame.</h3>
+                        </div>
+                        <div class="preview-frame preview-frame--compact">
+                            <div class="preview-chrome">
+                                <div class="preview-dots" aria-hidden="true">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="preview-kicker">Learning view</span>
+                            </div>
+                            <div class="preview-surface preview-surface--learning">
+                                <div class="preview-pill-row">
+                                    <span class="preview-pill preview-pill--active"></span>
+                                    <span class="preview-pill"></span>
+                                    <span class="preview-pill"></span>
+                                </div>
+                                <div class="preview-card-grid">
+                                    <span class="preview-block preview-block--tall"></span>
+                                    <span class="preview-block"></span>
+                                    <span class="preview-block preview-block--soft"></span>
+                                    <span class="preview-block"></span>
+                                </div>
+                                <div class="preview-list-lines">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="featured-card" data-reveal>
+                        <div class="featured-copy">
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <span class="portfolio-kicker">Premium client portal</span>
+                                <span class="portfolio-inline-tag">Private access</span>
+                            </div>
+                            <h3 class="deu-h3 text-[var(--deu-ink)]">A softer, high-trust portal surface for approvals, requests, and status visibility.</h3>
+                        </div>
+                        <div class="preview-frame preview-frame--compact">
+                            <div class="preview-chrome">
+                                <div class="preview-dots" aria-hidden="true">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="preview-kicker">Client view</span>
+                            </div>
+                            <div class="preview-surface preview-surface--portal">
+                                <div class="preview-banner"></div>
+                                <div class="preview-split-grid">
+                                    <span class="preview-block preview-block--soft"></span>
+                                    <span class="preview-block preview-block--tall"></span>
+                                </div>
+                                <div class="preview-stat-grid">
+                                    <span class="preview-block"></span>
+                                    <span class="preview-block preview-block--strong"></span>
+                                    <span class="preview-block"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase" class="border-b border-[var(--deu-line)]">
+            <div class="portfolio-shell py-16 lg:py-24">
+                <div class="portfolio-section-intro" data-reveal>
+                    <div class="flex flex-col gap-4">
+                        <span class="portfolio-eyebrow">Main showcase</span>
+                        <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Browse previous projects through structured rows, not a generic card wall.</h2>
+                    </div>
+                    <p class="deu-body-lg max-w-[42rem] text-[var(--deu-ink-2)]">Each row keeps the same essentials visible: title, client/domain, a short summary, services, outcome, and a framed preview area that behaves like an actual product glimpse.</p>
+                </div>
+
+                <div class="filter-row mt-8" data-reveal aria-label="Project categories">
+                    <button type="button" class="filter-chip is-active" aria-pressed="true">All work</button>
+                    <button type="button" class="filter-chip" aria-pressed="false">Operations</button>
+                    <button type="button" class="filter-chip" aria-pressed="false">Education</button>
+                    <button type="button" class="filter-chip" aria-pressed="false">Healthcare</button>
+                    <button type="button" class="filter-chip" aria-pressed="false">Client portals</button>
+                    <button type="button" class="filter-chip" aria-pressed="false">Automation</button>
+                </div>
+
+                <div class="showcase-list mt-8">
+                    <article class="project-row" data-reveal>
+                        <div class="project-preview">
+                            <div class="preview-frame preview-frame--row">
+                                <div class="preview-chrome">
+                                    <div class="preview-dots" aria-hidden="true">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <span class="preview-kicker">AI operations dashboard</span>
+                                </div>
+                                <div class="preview-surface preview-surface--dashboard">
+                                    <div class="preview-sidebar-stack">
+                                        <span class="preview-block preview-block--accent"></span>
+                                        <span class="preview-block"></span>
+                                        <span class="preview-block preview-block--soft"></span>
+                                        <span class="preview-block"></span>
+                                    </div>
+                                    <div class="preview-main-stack">
+                                        <div class="preview-stat-grid">
+                                            <span class="preview-block preview-block--strong"></span>
+                                            <span class="preview-block"></span>
+                                            <span class="preview-block preview-block--soft"></span>
+                                        </div>
+                                        <div class="preview-chart-row">
+                                            <span></span><span></span><span></span><span></span>
+                                        </div>
+                                        <div class="preview-table-lines">
+                                            <span></span><span></span><span></span><span></span><span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-topline">
+                                <span class="portfolio-kicker">Project 01</span>
+                                <span class="portfolio-inline-tag">Service operations</span>
+                            </div>
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">AI operations dashboard</h3>
+                            <p class="deu-body-lg text-[var(--deu-ink-2)]">A monitoring and decision surface for a service business coordinating jobs, teams, exceptions, and AI-supported recommendations in one controlled environment.</p>
+                            <div class="project-detail-grid">
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Client / domain</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Service business platform with live operational oversight.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Services</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Product strategy, dashboard UX, workflow orchestration, AI signal design.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Result</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Sharper visibility and faster triage without a visually noisy command center.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-row project-row--reverse" data-reveal>
+                        <div class="project-preview">
+                            <div class="preview-frame preview-frame--row">
+                                <div class="preview-chrome">
+                                    <div class="preview-dots" aria-hidden="true">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <span class="preview-kicker">Multilingual learning platform</span>
+                                </div>
+                                <div class="preview-surface preview-surface--learning">
+                                    <div class="preview-pill-row">
+                                        <span class="preview-pill preview-pill--active"></span>
+                                        <span class="preview-pill"></span>
+                                        <span class="preview-pill"></span>
+                                    </div>
+                                    <div class="preview-card-grid">
+                                        <span class="preview-block preview-block--tall"></span>
+                                        <span class="preview-block"></span>
+                                        <span class="preview-block preview-block--soft"></span>
+                                        <span class="preview-block"></span>
+                                    </div>
+                                    <div class="preview-list-lines">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-topline">
+                                <span class="portfolio-kicker">Project 02</span>
+                                <span class="portfolio-inline-tag">Education</span>
+                            </div>
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Multilingual learning platform</h3>
+                            <p class="deu-body-lg text-[var(--deu-ink-2)]">A language-ready course platform that makes curriculum, translation layers, and learner progress feel unified rather than stitched together.</p>
+                            <div class="project-detail-grid">
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Client / domain</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Education product with multilingual expansion goals.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Services</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Information architecture, language-ready UX, product flows, design system framing.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Result</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">A clearer path to bilingual growth and easier navigation across lesson states.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-row" data-reveal>
+                        <div class="project-preview">
+                            <div class="preview-frame preview-frame--row">
+                                <div class="preview-chrome">
+                                    <div class="preview-dots" aria-hidden="true">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <span class="preview-kicker">Healthcare workflow system</span>
+                                </div>
+                                <div class="preview-surface preview-surface--health">
+                                    <div class="preview-banner preview-banner--alert"></div>
+                                    <div class="preview-health-grid">
+                                        <span class="preview-block preview-block--tall"></span>
+                                        <div class="preview-list-lines">
+                                            <span></span><span></span><span></span><span></span>
+                                        </div>
+                                    </div>
+                                    <div class="preview-timeline">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-topline">
+                                <span class="portfolio-kicker">Project 03</span>
+                                <span class="portfolio-inline-tag">Healthcare</span>
+                            </div>
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Healthcare workflow system</h3>
+                            <p class="deu-body-lg text-[var(--deu-ink-2)]">A coordination surface for appointments, staff actions, and care-pathway exceptions designed to feel legible and trusted under real operational pressure.</p>
+                            <div class="project-detail-grid">
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Client / domain</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Healthcare operations and internal clinical coordination.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Services</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Service mapping, interface concepts, alert design, workflow modeling.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Result</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">More understandable routing logic and calmer visibility into sensitive processes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-row project-row--reverse" data-reveal>
+                        <div class="project-preview">
+                            <div class="preview-frame preview-frame--row">
+                                <div class="preview-chrome">
+                                    <div class="preview-dots" aria-hidden="true">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <span class="preview-kicker">Premium client portal</span>
+                                </div>
+                                <div class="preview-surface preview-surface--portal">
+                                    <div class="preview-banner"></div>
+                                    <div class="preview-split-grid">
+                                        <span class="preview-block preview-block--soft"></span>
+                                        <span class="preview-block preview-block--tall"></span>
+                                    </div>
+                                    <div class="preview-stat-grid">
+                                        <span class="preview-block"></span>
+                                        <span class="preview-block preview-block--strong"></span>
+                                        <span class="preview-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-topline">
+                                <span class="portfolio-kicker">Project 04</span>
+                                <span class="portfolio-inline-tag">Client portal</span>
+                            </div>
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Premium client portal</h3>
+                            <p class="deu-body-lg text-[var(--deu-ink-2)]">A private-facing workspace for project status, approvals, requests, and concierge-style communication that avoids the coldness of a generic enterprise portal.</p>
+                            <div class="project-detail-grid">
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Client / domain</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">High-trust service relationship with private access needs.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Services</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Portal UX, trust-layer design, approvals flow, premium interface detailing.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Result</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">A more confident status experience with less friction around approvals and updates.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-row" data-reveal>
+                        <div class="project-preview">
+                            <div class="preview-frame preview-frame--row">
+                                <div class="preview-chrome">
+                                    <div class="preview-dots" aria-hidden="true">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <span class="preview-kicker">Automation control center</span>
+                                </div>
+                                <div class="preview-surface preview-surface--automation">
+                                    <div class="preview-node-row">
+                                        <span class="preview-node preview-node--active"></span>
+                                        <span class="preview-node"></span>
+                                        <span class="preview-node"></span>
+                                    </div>
+                                    <div class="preview-connection-grid">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="preview-list-lines">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-topline">
+                                <span class="portfolio-kicker">Project 05</span>
+                                <span class="portfolio-inline-tag">Automation</span>
+                            </div>
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Automation control center</h3>
+                            <p class="deu-body-lg text-[var(--deu-ink-2)]">A supervisory view for connected workflows, exceptions, and execution health where humans can quickly understand what is running, what failed, and what needs attention next.</p>
+                            <div class="project-detail-grid">
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Client / domain</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Back-office automation and operations monitoring.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Services</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Automation mapping, control center UI, integration planning, exception states.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Result</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">One composed place to monitor automations instead of scattered tools and alerts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-row project-row--reverse" data-reveal>
+                        <div class="project-preview">
+                            <div class="preview-frame preview-frame--row">
+                                <div class="preview-chrome">
+                                    <div class="preview-dots" aria-hidden="true">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <span class="preview-kicker">Service business operating system</span>
+                                </div>
+                                <div class="preview-surface preview-surface--service">
+                                    <div class="preview-calendar-grid">
+                                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="preview-stat-grid">
+                                        <span class="preview-block preview-block--strong"></span>
+                                        <span class="preview-block"></span>
+                                        <span class="preview-block"></span>
+                                    </div>
+                                    <div class="preview-table-lines">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-topline">
+                                <span class="portfolio-kicker">Project 06</span>
+                                <span class="portfolio-inline-tag">Operating system</span>
+                            </div>
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Service business operating system</h3>
+                            <p class="deu-body-lg text-[var(--deu-ink-2)]">A broader platform concept tying scheduling, field execution, reporting, and management visibility together so every team sees the same operating picture.</p>
+                            <div class="project-detail-grid">
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Client / domain</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Multi-location services with desk and field coordination.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Services</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Scheduling design, KPI architecture, responsive product structure, mobile-to-desk continuity.</p>
+                                </div>
+                                <div class="project-detail">
+                                    <span class="project-detail-label">Result</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Better alignment between leadership, coordinators, and frontline execution.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="portfolio-shell py-16 lg:py-24">
+                <div class="quiet-cta" data-reveal>
+                    <div class="grid gap-8 lg:grid-cols-[minmax(0,6fr)_minmax(18rem,3fr)] lg:items-end">
+                        <div class="flex flex-col gap-4">
+                            <span class="portfolio-eyebrow">Quiet next step</span>
+                            <h2 class="deu-h1 max-w-[11ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">If your product needs this level of structure, we can review the brief.</h2>
+                            <p class="deu-body-lg max-w-[38rem] text-[var(--deu-ink-2)]">Bring an existing platform, a product idea, or an operations challenge. We will respond with a practical read on what should be clarified, framed, and built next.</p>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <a href="mailto:hello@deuinnovation.com" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-5 py-3 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:bg-[var(--deu-panel-strong)] hover:text-[var(--deu-primary-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--deu-primary)]">
+                                hello@deuinnovation.com
+                                <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+                            </a>
+                            <p class="deu-body text-[var(--deu-ink-3)]">A calm first conversation, followed by a clearer path into the work.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <style>
+      .light {
+        --deu-bg: #f2f0ea;
+        --deu-surface: #f6f4ee;
+        --deu-surface-2: #ece8df;
+        --deu-surface-3: #e2ddd2;
+        --deu-panel: rgba(17, 17, 18, 0.035);
+        --deu-panel-strong: rgba(17, 17, 18, 0.06);
+        --deu-ink: #151619;
+        --deu-foreground: #151619;
+        --deu-ink-2: rgba(21, 22, 25, 0.74);
+        --deu-ink-3: rgba(21, 22, 25, 0.44);
+        --deu-line: rgba(21, 22, 25, 0.1);
+        --deu-line-strong: rgba(21, 22, 25, 0.16);
+        --deu-primary: #FFCC00;
+        --deu-primary-strong: #FFD633;
+        --deu-primary-soft: rgba(255, 204, 0, 0.18);
+        --deu-primary-ink: #111112;
+        --deu-flag-red: #DD0000;
+        --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+        --deu-oxblood: #DD0000;
+        --deu-shadow-1: 0 18px 40px rgba(15, 17, 21, 0.07);
+        --deu-shadow-2: 0 30px 70px rgba(15, 17, 21, 0.08);
+      }
+
+      .dark {
+        --deu-bg: #0e0f10;
+        --deu-surface: #151618;
+        --deu-surface-2: #1c1e21;
+        --deu-surface-3: #25282c;
+        --deu-panel: rgba(255, 255, 255, 0.035);
+        --deu-panel-strong: rgba(255, 255, 255, 0.07);
+        --deu-ink: #f6f2e8;
+        --deu-foreground: #f6f2e8;
+        --deu-ink-2: rgba(246, 242, 232, 0.78);
+        --deu-ink-3: rgba(246, 242, 232, 0.5);
+        --deu-line: rgba(246, 242, 232, 0.1);
+        --deu-line-strong: rgba(246, 242, 232, 0.17);
+        --deu-primary: #FFCC00;
+        --deu-primary-strong: #FFE066;
+        --deu-primary-soft: rgba(255, 204, 0, 0.2);
+        --deu-primary-ink: #111112;
+        --deu-flag-red: #DD0000;
+        --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+      }
+
+      body {
+        background: var(--deu-bg);
+        color: var(--deu-ink);
+        transition: background-color 220ms ease, color 220ms ease;
+      }
+
+      .portfolio-shell {
+        width: min(var(--deu-max-width), calc(100vw - 2rem));
+        margin-inline: auto;
+      }
+
+      .portfolio-floating-nav {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--deu-line-strong) 88%, transparent);
+        border-radius: clamp(1.35rem, 2vw, 2rem);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-surface) 76%, transparent), color-mix(in srgb, var(--deu-panel) 72%, transparent) 100%),
+          radial-gradient(circle at top left, color-mix(in srgb, var(--deu-primary) 13%, transparent) 0%, transparent 32%),
+          radial-gradient(circle at top right, color-mix(in srgb, var(--deu-flag-red-soft) 80%, transparent) 0%, transparent 38%),
+          color-mix(in srgb, var(--deu-bg) 76%, transparent);
+        box-shadow:
+          0 24px 54px color-mix(in srgb, var(--deu-ink) 9%, transparent),
+          inset 0 1px 0 color-mix(in srgb, var(--deu-surface) 80%, transparent);
+        backdrop-filter: blur(28px) saturate(155%);
+        -webkit-backdrop-filter: blur(28px) saturate(155%);
+      }
+
+      .portfolio-floating-nav::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--deu-primary) 36%, var(--deu-line)), transparent);
+        opacity: 0.95;
+        pointer-events: none;
+      }
+
+      .portfolio-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1.15rem 0.82rem;
+      }
+
+      .portfolio-brand {
+        flex: 1 1 auto;
+        max-width: min(26rem, 100%);
+      }
+
+      .portfolio-brand-copy {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+
+      .portfolio-brand-meta {
+        white-space: nowrap;
+        font-size: 0.72rem;
+        line-height: 1;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--deu-ink-3);
+      }
+
+      .portfolio-aura {
+        position: absolute;
+        inset: -10% auto auto 8%;
+        width: min(46rem, 60vw);
+        height: min(46rem, 60vw);
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at 34% 34%, color-mix(in srgb, var(--deu-primary) 18%, transparent) 0%, transparent 58%),
+          radial-gradient(circle at 72% 44%, color-mix(in srgb, var(--deu-flag-red) 24%, transparent) 0%, transparent 64%);
+        filter: blur(42px);
+        opacity: 0.78;
+        pointer-events: none;
+      }
+
+      .portfolio-header-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        min-width: 0;
+      }
+
+      .portfolio-auth-links {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28rem;
+        border: 1px solid color-mix(in srgb, var(--deu-line) 88%, transparent);
+        border-radius: 999px;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 74%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 78%, transparent);
+        padding: 0.25rem;
+      }
+
+      .portfolio-auth-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.75rem;
+        white-space: nowrap;
+        border-radius: var(--deu-radius-pill);
+        border: 1px solid transparent;
+        padding: 0.72rem 0.98rem;
+        font-size: 0.76rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--deu-ink-2);
+        transition: transform 180ms cubic-bezier(.2,.8,.2,1), border-color 180ms cubic-bezier(.2,.8,.2,1), color 180ms cubic-bezier(.2,.8,.2,1), background-color 180ms cubic-bezier(.2,.8,.2,1), box-shadow 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .portfolio-auth-link:hover {
+        transform: translateY(-1px);
+        color: var(--deu-ink);
+      }
+
+      .portfolio-auth-link--primary {
+        border-color: color-mix(in srgb, var(--deu-line-strong) 92%, transparent);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary-soft) 94%, transparent), color-mix(in srgb, var(--deu-panel-strong) 74%, transparent));
+        color: var(--deu-ink);
+        box-shadow: inset 0 1px 0 color-mix(in srgb, var(--deu-surface) 70%, transparent);
+      }
+
+      .portfolio-auth-link--primary:hover {
+        border-color: var(--deu-primary);
+        color: var(--deu-primary-strong);
+      }
+
+      .portfolio-nav-lower {
+        display: flex;
+        align-items: center;
+        gap: 0.95rem;
+        border-top: 1px solid color-mix(in srgb, var(--deu-line) 88%, transparent);
+        padding: 0.85rem 1.15rem 1rem;
+      }
+
+      .portfolio-nav-kicker {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        font-size: 0.72rem;
+        line-height: 1;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--deu-ink-3);
+      }
+
+      .portfolio-subnav {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex: 1 1 auto;
+        overflow-x: auto;
+        min-width: 0;
+        padding: 0;
+      }
+
+      .portfolio-subnav-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.5rem;
+        white-space: nowrap;
+        border-radius: var(--deu-radius-pill);
+        border: 1px solid color-mix(in srgb, var(--deu-line) 58%, transparent);
+        padding: 0.6rem 0.95rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--deu-ink-2);
+        background: color-mix(in srgb, var(--deu-panel) 82%, transparent);
+        transition: border-color 180ms cubic-bezier(.2,.8,.2,1), color 180ms cubic-bezier(.2,.8,.2,1), background-color 180ms cubic-bezier(.2,.8,.2,1), transform 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .portfolio-subnav-link:hover {
+        color: var(--deu-ink);
+        transform: translateY(-1px);
+      }
+
+      .portfolio-subnav-link.is-active {
+        border-color: color-mix(in srgb, var(--deu-primary) 38%, var(--deu-line-strong));
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary-soft) 88%, transparent), color-mix(in srgb, var(--deu-panel-strong) 84%, transparent));
+        color: var(--deu-primary);
+        box-shadow: inset 0 1px 0 color-mix(in srgb, var(--deu-surface) 72%, transparent);
+      }
+
+      .portfolio-theme-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.72rem;
+        min-width: 0;
+        border: 1px solid color-mix(in srgb, var(--deu-line) 90%, transparent);
+        border-radius: 999px;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 84%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 78%, transparent);
+        color: var(--deu-ink);
+        box-shadow: 0 14px 30px color-mix(in srgb, var(--deu-ink) 8%, transparent);
+        padding: 0.32rem 0.4rem 0.32rem 0.34rem;
+        transition: transform 180ms cubic-bezier(.2,.8,.2,1), border-color 180ms cubic-bezier(.2,.8,.2,1), background-color 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .portfolio-theme-toggle:hover {
+        transform: translateY(-1px);
+        border-color: var(--deu-line-strong);
+      }
+
+      .portfolio-theme-toggle:focus-visible {
+        outline: 2px solid var(--deu-primary);
+        outline-offset: 2px;
+      }
+
+      .portfolio-theme-toggle__track {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.9rem;
+        width: 4.3rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--deu-panel-strong) 85%, transparent);
+        border: 1px solid color-mix(in srgb, var(--deu-line-strong) 78%, transparent);
+        padding: 0.22rem 0.4rem;
+      }
+
+      .portfolio-theme-toggle__thumb {
+        position: absolute;
+        top: 0.18rem;
+        left: 0.2rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 999px;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 28%, white), var(--deu-primary));
+        box-shadow: 0 10px 22px color-mix(in srgb, var(--deu-primary) 24%, transparent);
+        transition: transform 200ms cubic-bezier(.2,.8,.2,1), background-color 180ms cubic-bezier(.2,.8,.2,1), box-shadow 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .dark .portfolio-theme-toggle__thumb {
+        transform: translateX(2.15rem);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-surface-3) 92%, white), var(--deu-surface-2));
+        box-shadow: 0 10px 22px color-mix(in srgb, var(--deu-foreground) 12%, transparent);
+      }
+
+      .portfolio-theme-toggle__glyph {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--deu-ink-3);
+        transition: color 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .light .portfolio-theme-toggle__glyph--sun,
+      .dark .portfolio-theme-toggle__glyph--moon {
+        color: var(--deu-primary-ink);
+      }
+
+      .portfolio-theme-toggle__label {
+        min-width: 2.85rem;
+        white-space: nowrap;
+        font-size: 0.76rem;
+        line-height: 1;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--deu-ink-2);
+      }
+
+      .portfolio-badge,
+      .portfolio-inline-tag,
+      .filter-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        border: 1px solid var(--deu-line);
+        background: var(--deu-panel);
+        color: var(--deu-ink);
+        font-size: 0.76rem;
+        line-height: 1.3;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .portfolio-badge {
+        border-radius: var(--deu-radius-md);
+        padding: 0.7rem 0.95rem;
+      }
+
+      .portfolio-badge--subtle {
+        color: var(--deu-ink-2);
+      }
+
+      .portfolio-mini-panel,
+      .portfolio-note-card,
+      .featured-card,
+      .project-row,
+      .quiet-cta {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--deu-line);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 78%, transparent), transparent 100%),
+          var(--deu-surface);
+        box-shadow: var(--deu-shadow-1);
+      }
+
+      .portfolio-mini-panel,
+      .portfolio-note-card {
+        border-radius: var(--deu-radius-md);
+        padding: 1rem;
+      }
+
+      .featured-card,
+      .project-row,
+      .quiet-cta {
+        border-radius: var(--deu-radius-lg);
+      }
+
+      .portfolio-mini-label,
+      .portfolio-eyebrow,
+      .portfolio-kicker,
+      .preview-kicker,
+      .project-detail-label {
+        font-size: 0.78rem;
+        line-height: 1.45;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .portfolio-mini-label,
+      .preview-kicker,
+      .project-detail-label {
+        color: var(--deu-ink-3);
+      }
+
+      .portfolio-eyebrow,
+      .portfolio-kicker {
+        color: var(--deu-primary);
+      }
+
+      .portfolio-section-intro {
+        display: grid;
+        gap: 1.2rem;
+      }
+
+      .portfolio-hero-frame,
+      .preview-frame {
+        display: grid;
+        gap: 0.9rem;
+        border: 1px solid var(--deu-line);
+        border-radius: var(--deu-radius-lg);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 7%, transparent), transparent 100%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 82%, transparent), transparent 100%),
+          var(--deu-surface-2);
+        padding: 1rem;
+      }
+
+      .portfolio-hero-frame {
+        min-height: 23rem;
+      }
+
+      .preview-frame--compact {
+        min-height: 16rem;
+      }
+
+      .preview-frame--row {
+        min-height: 100%;
+      }
+
+      .preview-chrome {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .preview-dots {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .preview-dots span,
+      .preview-node {
+        display: block;
+        border-radius: 999px;
+        background: var(--deu-ink-3);
+      }
+
+      .preview-dots span {
+        width: 0.45rem;
+        height: 0.45rem;
+      }
+
+      .preview-surface {
+        display: grid;
+        gap: 0.85rem;
+        min-height: 13rem;
+        height: 100%;
+        border: 1px solid var(--deu-line);
+        border-radius: 14px;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel) 70%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 88%, transparent);
+        padding: 0.95rem;
+      }
+
+      .preview-surface--hero {
+        grid-template-columns: minmax(5rem, 0.8fr) minmax(0, 2.2fr);
+      }
+
+      .preview-hero-rail,
+      .preview-sidebar-stack,
+      .preview-hero-stack {
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .preview-hero-main,
+      .preview-surface--dashboard {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .preview-hero-main {
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr);
+      }
+
+      .preview-surface--dashboard {
+        grid-template-columns: minmax(4.25rem, 0.72fr) minmax(0, 2fr);
+      }
+
+      .preview-hero-stage,
+      .preview-main-stack {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .preview-block,
+      .preview-banner,
+      .preview-pill,
+      .preview-wave,
+      .preview-chart-row span,
+      .preview-table-lines span,
+      .preview-list-lines span,
+      .preview-timeline span,
+      .preview-calendar-grid span,
+      .preview-connection-grid span {
+        display: block;
+        border-radius: 10px;
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-panel-strong) 88%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface-3) 76%, transparent);
+      }
+
+      .preview-block {
+        min-height: 2.4rem;
+      }
+
+      .preview-block--tall {
+        min-height: 5rem;
+      }
+
+      .preview-block--strong,
+      .preview-pill--active,
+      .preview-node--active {
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 36%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface-3) 76%, transparent);
+      }
+
+      .preview-block--soft {
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-flag-red-soft) 90%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface-3) 76%, transparent);
+      }
+
+      .preview-block--accent,
+      .preview-banner {
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 42%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface-3) 72%, transparent);
+      }
+
+      .preview-banner {
+        min-height: 3.5rem;
+      }
+
+      .preview-banner--alert {
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-flag-red) 30%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface-3) 72%, transparent);
+      }
+
+      .preview-card-lineup,
+      .preview-split-grid,
+      .preview-health-grid {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .preview-card-grid {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .preview-pill-row,
+      .preview-node-row {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .preview-pill {
+        min-height: 1.35rem;
+        flex: 1 1 0;
+        border-radius: var(--deu-radius-pill);
+      }
+
+      .preview-node {
+        width: 0.95rem;
+        height: 0.95rem;
+        flex: 0 0 auto;
+      }
+
+      .preview-stat-grid,
+      .preview-grid-lines--three,
+      .preview-calendar-grid,
+      .preview-connection-grid {
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .preview-stat-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .preview-grid-lines--three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .preview-grid-lines--three span,
+      .preview-calendar-grid span {
+        min-height: 4.1rem;
+      }
+
+      .preview-wave {
+        min-height: 4.8rem;
+      }
+
+      .preview-chart-row {
+        display: grid;
+        align-items: end;
+        gap: 0.6rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .preview-chart-row span:nth-child(1) { min-height: 3.8rem; }
+      .preview-chart-row span:nth-child(2) { min-height: 5rem; }
+      .preview-chart-row span:nth-child(3) { min-height: 2.8rem; }
+      .preview-chart-row span:nth-child(4) { min-height: 4.6rem; }
+
+      .preview-table-lines,
+      .preview-list-lines,
+      .preview-timeline {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .preview-table-lines span,
+      .preview-list-lines span {
+        min-height: 0.8rem;
+      }
+
+      .preview-timeline {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .preview-timeline span {
+        min-height: 1.35rem;
+      }
+
+      .preview-calendar-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .preview-connection-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .preview-connection-grid span {
+        min-height: 3.25rem;
+      }
+
+      .featured-grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .featured-card {
+        display: grid;
+        gap: 1rem;
+        padding: 1.1rem;
+      }
+
+      .featured-card--lead {
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 8%, transparent), transparent 100%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 78%, transparent), transparent 100%),
+          var(--deu-surface);
+      }
+
+      .featured-copy {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .portfolio-inline-tag {
+        border-radius: var(--deu-radius-md);
+        padding: 0.65rem 0.85rem;
+      }
+
+      .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+      }
+
+      .filter-chip {
+        border-radius: var(--deu-radius-md);
+        padding: 0.7rem 0.95rem;
+        color: var(--deu-ink-2);
+      }
+
+      .filter-chip.is-active {
+        color: var(--deu-primary);
+      }
+
+      .showcase-list {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .project-row {
+        display: grid;
+        gap: 1.25rem;
+        padding: 1.1rem;
+      }
+
+      .project-preview,
+      .project-content,
+      .project-detail-grid,
+      .project-topline,
+      .project-detail {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .project-content {
+        align-content: start;
+      }
+
+      .project-topline {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: start;
+      }
+
+      .project-detail-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .project-detail {
+        border-top: 1px solid var(--deu-line);
+        padding-top: 0.95rem;
+      }
+
+      .quiet-cta {
+        padding: clamp(1.35rem, 2.8vw, 2rem);
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 9%, transparent), transparent 44%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 78%, transparent), transparent 100%),
+          var(--deu-surface);
+      }
+
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 620ms cubic-bezier(.2,.8,.2,1), transform 620ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (min-width: 768px) {
+        .featured-grid {
+          grid-template-columns: minmax(0, 1.35fr) repeat(2, minmax(0, 1fr));
+        }
+
+        .featured-card--lead {
+          grid-row: span 2;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .project-row {
+          grid-template-columns: minmax(0, 4.8fr) minmax(0, 5.2fr);
+          align-items: stretch;
+        }
+
+        .project-row--reverse .project-preview {
+          order: 2;
+        }
+
+        .project-row--reverse .project-content {
+          order: 1;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .portfolio-shell {
+          width: min(var(--deu-max-width), calc(100vw - 1rem));
+        }
+
+        .portfolio-floating-nav {
+          border-radius: 1.4rem;
+        }
+
+        .portfolio-topbar {
+          align-items: flex-start;
+          flex-wrap: wrap;
+          padding: 0.9rem 0.9rem 0.72rem;
+        }
+
+        .portfolio-brand {
+          max-width: 100%;
+        }
+
+        .portfolio-header-actions {
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 0.55rem;
+        }
+
+        .portfolio-auth-links {
+          flex: 1 1 auto;
+          gap: 0.25rem;
+          min-width: 0;
+        }
+
+        .portfolio-auth-link {
+          min-height: 2.45rem;
+          flex: 1 1 auto;
+          padding: 0.62rem 0.78rem;
+          font-size: 0.7rem;
+        }
+
+        .portfolio-theme-toggle {
+          flex: 0 0 auto;
+          gap: 0.5rem;
+          padding-right: 0.35rem;
+        }
+
+        .portfolio-theme-toggle__label {
+          min-width: 2.3rem;
+          font-size: 0.7rem;
+          letter-spacing: 0.1em;
+        }
+
+        .portfolio-nav-lower {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 0.55rem;
+          padding: 0.72rem 0.9rem 0.9rem;
+        }
+
+        .portfolio-nav-kicker {
+          width: 100%;
+          font-size: 0.68rem;
+          letter-spacing: 0.14em;
+        }
+
+        .portfolio-subnav {
+          width: 100%;
+          gap: 0.4rem;
+          padding-bottom: 0.06rem;
+        }
+
+        .portfolio-subnav-link {
+          min-height: 2.35rem;
+          padding: 0.55rem 0.82rem;
+          font-size: 0.72rem;
+        }
+
+        .portfolio-hero-frame {
+          min-height: 20rem;
+          padding: 0.85rem;
+        }
+
+        .preview-surface--hero,
+        .preview-hero-main,
+        .preview-surface--dashboard,
+        .preview-card-grid,
+        .preview-split-grid,
+        .preview-health-grid,
+        .project-detail-grid,
+        .project-topline {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-surface--hero {
+          gap: 0.75rem;
+        }
+
+        .preview-hero-rail {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .preview-hero-main {
+          gap: 0.75rem;
+        }
+
+        .featured-grid {
+          grid-auto-flow: column;
+          grid-auto-columns: minmax(18rem, 86vw);
+          min-width: max-content;
+          overflow-x: auto;
+          padding-bottom: 0.25rem;
+          scroll-snap-type: x proximity;
+        }
+
+        .featured-card {
+          min-height: 100%;
+          scroll-snap-align: start;
+        }
+
+        .featured-card--lead {
+          background:
+            linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 8%, transparent), transparent 100%),
+            linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 78%, transparent), transparent 100%),
+            var(--deu-surface);
+        }
+
+        .project-row {
+          gap: 1rem;
+          padding: 0.95rem;
+        }
+
+        .preview-frame--row {
+          min-height: 14rem;
+        }
+
+        .project-detail {
+          gap: 0.45rem;
+          padding-top: 0.8rem;
+        }
+
+        .preview-calendar-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body,
+        [data-reveal],
+        .portfolio-theme-toggle,
+        .portfolio-theme-toggle__thumb,
+        .portfolio-theme-toggle__glyph,
+        .portfolio-auth-link,
+        .portfolio-subnav-link {
+          transition-duration: 0.01ms !important;
+        }
+
+        [data-reveal] {
+          transform: none !important;
+        }
+      }
+    </style>
+    <script>
+      const themeStorageKey = 'deu-theme';
+      const rootElement = document.documentElement;
+      const themeToggle = document.querySelector('[data-theme-toggle]');
+      const themeLabel = document.querySelector('[data-theme-label]');
+
+      const applyTheme = (theme, options = {}) => {
+        const nextTheme = theme === 'dark' ? 'dark' : 'light';
+        rootElement.classList.remove('light', 'dark');
+        rootElement.classList.add(nextTheme);
+
+        if (themeToggle) {
+          const isDark = nextTheme === 'dark';
+          themeToggle.setAttribute('aria-pressed', String(isDark));
+          themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        if (themeLabel) {
+          themeLabel.textContent = nextTheme === 'dark' ? 'Dark' : 'Light';
+        }
+
+        if (options.persist) {
+          try {
+            window.localStorage.setItem(themeStorageKey, nextTheme);
+          } catch (error) {
+          }
+        }
+      };
+
+      let initialTheme = rootElement.classList.contains('dark') ? 'dark' : 'light';
+
+      try {
+        const storedTheme = window.localStorage.getItem(themeStorageKey);
+        if (storedTheme === 'light' || storedTheme === 'dark') {
+          initialTheme = storedTheme;
+        }
+      } catch (error) {
+      }
+
+      applyTheme(initialTheme);
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const nextTheme = rootElement.classList.contains('dark') ? 'light' : 'dark';
+          applyTheme(nextTheme, { persist: true });
+        });
+      }
+
+      const revealNodes = document.querySelectorAll('[data-reveal]');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!reduceMotion && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+
+        revealNodes.forEach((node) => revealObserver.observe(node));
+      } else {
+        revealNodes.forEach((node) => node.classList.add('is-visible'));
+      }
+
+      lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeuInnovation — Portfolio</title>
+    <style id="theme-vars">
+:root {
+  --deu-bg: #111112;
+  --deu-surface: #17181a;
+  --deu-surface-2: #1e2023;
+  --deu-surface-3: #25282c;
+  --deu-panel: rgba(255, 255, 255, 0.03);
+  --deu-panel-strong: rgba(255, 255, 255, 0.06);
+  --deu-ink: #f3efe5;
+  --deu-foreground: #f3efe5;
+  --deu-ink-2: rgba(243, 239, 229, 0.76);
+  --deu-ink-3: rgba(243, 239, 229, 0.48);
+  --deu-line: rgba(243, 239, 229, 0.1);
+  --deu-line-strong: rgba(243, 239, 229, 0.16);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFD633;
+  --deu-primary-soft: rgba(255, 204, 0, 0.18);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+  --deu-oxblood: #DD0000;
+  --deu-shadow-1: 0 18px 40px rgba(0, 0, 0, 0.05);
+  --deu-shadow-2: 0 30px 70px rgba(0, 0, 0, 0.05);
+  --deu-radius-sm: 4px;
+  --deu-radius-md: 8px;
+  --deu-radius-lg: 16px;
+  --deu-radius-pill: 999px;
+  --deu-max-width: 1360px;
+  --deu-font-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --deu-font-display: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.dark {
+  --deu-bg: #0e0f10;
+  --deu-surface: #151618;
+  --deu-surface-2: #1c1e21;
+  --deu-surface-3: #25282c;
+  --deu-panel: rgba(255, 255, 255, 0.035);
+  --deu-panel-strong: rgba(255, 255, 255, 0.07);
+  --deu-ink: #f6f2e8;
+  --deu-foreground: #f6f2e8;
+  --deu-ink-2: rgba(246, 242, 232, 0.78);
+  --deu-ink-3: rgba(246, 242, 232, 0.5);
+  --deu-line: rgba(246, 242, 232, 0.1);
+  --deu-line-strong: rgba(246, 242, 232, 0.17);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFE066;
+  --deu-primary-soft: rgba(255, 204, 0, 0.2);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+}
+
+body {
+  font-family: var(--deu-font-body);
+  background: var(--deu-bg);
+  color: var(--deu-ink);
+}
+
+.deu-display {
+  font-family: var(--deu-font-display);
+  font-size: clamp(3rem, 6vw, 6.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.deu-h1 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+}
+
+.deu-h2 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(1.55rem, 2.1vw, 2.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.deu-h3 {
+  font-family: var(--deu-font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.deu-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.deu-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.deu-caption {
+  font-size: 0.81rem;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-foreground: var(--deu-foreground);
+    --color-primary: var(--deu-primary);
+  }
+  @layer base {
+    body { background: var(--deu-surface); color: var(--deu-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <header class="sticky top-0 z-50 border-b border-[var(--deu-line)] bg-[color-mix(in_srgb,var(--deu-bg)_88%,transparent)] backdrop-blur-xl">
+            <div class="mx-auto flex w-[min(var(--deu-max-width),calc(100vw-1.5rem))] items-center justify-between gap-4 py-4 lg:w-[min(var(--deu-max-width),calc(100vw-2rem))]">
+                <a href="./index.html" class="flex min-w-0 items-center gap-3 text-[var(--deu-ink)]" aria-label="DeuInnovation home">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] text-sm font-semibold tracking-[0.18em] text-[var(--deu-primary)]">DI</span>
+                    <span class="deu-h3 truncate">DeuInnovation</span>
+                </a>
+                <nav class="hidden items-center gap-8 text-sm text-[var(--deu-ink-2)] lg:flex">
+                    <a href="./index.html" class="transition-colors duration-150 hover:text-[var(--deu-ink)] focus-visible:text-[var(--deu-ink)]">Home</a>
+                    <a href="./portfolio.html" aria-current="page" class="text-[var(--deu-primary)]">Portfolio</a>
+                    <a href="#lens" class="transition-colors duration-150 hover:text-[var(--deu-ink)] focus-visible:text-[var(--deu-ink)]">Studio Lens</a>
+                    <a href="#contact" class="transition-colors duration-150 hover:text-[var(--deu-ink)] focus-visible:text-[var(--deu-ink)]">Contact</a>
+                </nav>
+                <a href="#contact" class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-4 py-2.5 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,color,background-color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:text-[var(--deu-primary-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--deu-primary)]">
+                    Start a conversation
+                </a>
+            </div>
+        </header>
+
+        <section class="border-b border-[var(--deu-line)]">
+            <div class="portfolio-shell relative overflow-hidden py-16 lg:py-24">
+                <div class="portfolio-aura"></div>
+                <div class="portfolio-reveal grid gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(18rem,4fr)] lg:items-end">
+                    <div class="flex flex-col gap-8">
+                        <div class="grid gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+                            <p class="max-w-[12rem] text-sm uppercase tracking-[0.18em] text-[var(--deu-ink-3)]">A curated body of work shaped through systems thinking, editorial restraint, and operational clarity.</p>
+                            <div class="inline-flex items-center gap-2 border-l border-[var(--deu-line)] pl-4 text-sm text-[var(--deu-ink-2)]">
+                                <span class="h-2 w-2 rounded-full bg-[var(--deu-primary)]"></span>
+                                Portfolio selection 2026
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-6">
+                            <h1 class="deu-display max-w-[10ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Work that turns complexity into calm.</h1>
+                            <p class="deu-body-lg max-w-[42rem] text-[var(--deu-ink-2)]">This page is not an archive of outputs. It is a studio edit of the kinds of systems we are drawn to: operational platforms, multilingual learning environments, healthcare coordination concepts, and premium client workspaces that ask for both control and grace.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-reveal flex flex-col gap-4 text-sm text-[var(--deu-ink-2)]" style="transition-delay: 90ms;">
+                        <div class="portfolio-note-panel">
+                            <span class="portfolio-note-kicker">Position</span>
+                            <p class="deu-body">DeuInnovation approaches digital work as a composed discipline: less ornament, more signal, stronger systems.</p>
+                        </div>
+                        <div class="portfolio-note-panel">
+                            <span class="portfolio-note-kicker">Selection logic</span>
+                            <p class="deu-body">Every case here was chosen to show how the studio frames difficult products with restraint, structure, and utility.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-b border-[var(--deu-line)]">
+            <div class="portfolio-shell py-16 lg:py-24">
+                <div class="portfolio-reveal flex flex-col gap-5 lg:max-w-[42rem]">
+                    <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Featured composition</h2>
+                    <p class="deu-body-lg text-[var(--deu-ink-2)]">A lead project sits in conversation with a secondary intervention and a slim metadata rail. The layout behaves like an exhibition wall: one anchor piece, one offset note, one quiet system of evidence.</p>
+                </div>
+
+                <div class="mt-12 grid gap-5 lg:grid-cols-[minmax(0,7fr)_minmax(14rem,2.2fr)] xl:grid-cols-[minmax(0,7fr)_minmax(18rem,2fr)]">
+                    <div class="grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(14rem,0.72fr)]">
+                        <article class="portfolio-reveal portfolio-feature-card lg:min-h-[33rem]">
+                            <div class="flex flex-wrap items-start justify-between gap-4">
+                                <div class="flex min-w-0 flex-col gap-3">
+                                    <span class="portfolio-meta-line">Featured case / AI operations dashboard</span>
+                                    <h3 class="deu-h1 max-w-[12ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Command surface for a distributed service business</h3>
+                                </div>
+                                <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-2 text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">Primary panel</span>
+                            </div>
+                            <p class="deu-body-lg max-w-[42rem] text-[var(--deu-ink-2)]">A studio-led concept for bringing scheduling, dispatch logic, team health, and AI-supported alerts into one composed workspace. The emphasis was on signal hierarchy, durable interaction rhythm, and a leadership view that feels decisive rather than crowded.</p>
+                            <div class="portfolio-diagram-grid">
+                                <div class="portfolio-diagram-cell">
+                                    <span class="portfolio-cell-label">System frame</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Live operational spine with tiered visibility for managers, coordinators, and field leads.</p>
+                                </div>
+                                <div class="portfolio-diagram-cell">
+                                    <span class="portfolio-cell-label">Studio move</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Replaced dashboard clutter with deliberate sequencing, strong status bands, and annotation-led guidance.</p>
+                                </div>
+                                <div class="portfolio-diagram-cell">
+                                    <span class="portfolio-cell-label">Delivery scope</span>
+                                    <p class="deu-body text-[var(--deu-ink)]">Product framing, UI system design, service mapping, and AI workflow orchestration.</p>
+                                </div>
+                            </div>
+                            <div class="portfolio-service-row">
+                                <span class="portfolio-chip">Product architecture</span>
+                                <span class="portfolio-chip">Interface system</span>
+                                <span class="portfolio-chip">Operational AI</span>
+                                <span class="portfolio-chip">Decision flow</span>
+                            </div>
+                        </article>
+
+                        <article class="portfolio-reveal portfolio-support-card lg:translate-y-10" style="transition-delay: 120ms;">
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="portfolio-meta-line">Offset study</span>
+                                <span class="text-sm text-[var(--deu-ink-3)]">02</span>
+                            </div>
+                            <h3 class="deu-h2 max-w-[12ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Premium client portal with a restrained private-room feel</h3>
+                            <p class="deu-body text-[var(--deu-ink-2)]">A supporting concept that pairs operational access with a more intimate interface language: quieter surfaces, stronger framing, and clear progress signals for clients who need confidence without noise.</p>
+                            <div class="grid gap-4 border-t border-[var(--deu-line)] pt-4 text-sm">
+                                <div class="portfolio-inline-pair">
+                                    <span class="truncate text-[var(--deu-ink-3)]">Sector</span>
+                                    <span class="truncate text-[var(--deu-ink)]">Private client operations</span>
+                                </div>
+                                <div class="portfolio-inline-pair">
+                                    <span class="truncate text-[var(--deu-ink-3)]">Emphasis</span>
+                                    <span class="truncate text-[var(--deu-ink)]">Trust, visibility, elegant handoff</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <aside class="portfolio-reveal portfolio-rail" style="transition-delay: 180ms;">
+                        <div class="portfolio-rail-block">
+                            <span class="portfolio-note-kicker">Metadata rail</span>
+                            <p class="deu-body text-[var(--deu-ink)]">The portfolio prioritizes systems that carry consequence: service delivery, regulated workflows, multilingual growth, and private client infrastructure.</p>
+                        </div>
+                        <div class="portfolio-rail-block">
+                            <span class="portfolio-stat">4</span>
+                            <p class="text-sm text-[var(--deu-ink-2)]">Case studies selected for compositional contrast and sector breadth.</p>
+                        </div>
+                        <div class="portfolio-rail-block">
+                            <span class="portfolio-stat">2</span>
+                            <p class="text-sm text-[var(--deu-ink-2)]">Core studio pillars: software engineering and AI-enabled operations.</p>
+                        </div>
+                        <div class="portfolio-rail-block">
+                            <span class="portfolio-note-kicker">Working preference</span>
+                            <p class="deu-body text-[var(--deu-ink)]">Projects where interface polish and operational intelligence need to evolve together.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="border-b border-[var(--deu-line)]">
+            <div class="portfolio-shell py-16 lg:py-24">
+                <div class="portfolio-reveal grid gap-6 lg:grid-cols-[minmax(0,6fr)_minmax(18rem,3fr)] lg:items-end">
+                    <div class="flex flex-col gap-5">
+                        <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Case study gallery</h2>
+                        <p class="deu-body-lg max-w-[42rem] text-[var(--deu-ink-2)]">The gallery is sequenced like a salon wall rather than a grid. Each entry holds its own shape, weight, and cadence while still reading as part of a single studio language.</p>
+                    </div>
+                    <p class="deu-body text-[var(--deu-ink-3)]">Four studies, each edited for clarity rather than volume.</p>
+                </div>
+
+                <div class="portfolio-salon mt-12">
+                    <article class="portfolio-reveal portfolio-case-card portfolio-case-large">
+                        <div class="flex flex-wrap items-start justify-between gap-4">
+                            <div class="flex min-w-0 flex-col gap-3">
+                                <span class="portfolio-meta-line">Project 01 / Service operations</span>
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">AI operations dashboard</h3>
+                            </div>
+                            <span class="portfolio-sector-tag">Service business / platform</span>
+                        </div>
+                        <p class="deu-body text-[var(--deu-ink-2)]">A composed operational dashboard for a service business managing scheduling, response quality, dispatch clarity, and intelligent escalation inside one live system.</p>
+                        <div class="grid gap-4 border-t border-[var(--deu-line)] pt-5">
+                            <div class="portfolio-inline-pair">
+                                <span class="truncate text-[var(--deu-ink-3)]">Services delivered</span>
+                                <span class="text-right text-[var(--deu-ink)]">Product framing, dashboard UX, workflow orchestration, AI signal design</span>
+                            </div>
+                            <div class="portfolio-inline-pair">
+                                <span class="truncate text-[var(--deu-ink-3)]">Outcome</span>
+                                <span class="text-right text-[var(--deu-ink)]">Sharper operating visibility with calmer decision surfaces for leadership teams.</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="portfolio-reveal portfolio-case-card portfolio-case-offset" style="transition-delay: 80ms;">
+                        <div class="flex flex-wrap items-start justify-between gap-4">
+                            <div class="flex min-w-0 flex-col gap-3">
+                                <span class="portfolio-meta-line">Project 02 / Education</span>
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">Multilingual digital learning platform</h3>
+                            </div>
+                            <span class="portfolio-sector-tag">Learning / multilingual product</span>
+                        </div>
+                        <p class="deu-body text-[var(--deu-ink-2)]">A digital learning environment designed for bilingual expansion, with course architecture, translation handling, and adaptive progression held within one elegant product frame.</p>
+                        <div class="grid gap-4 border-t border-[var(--deu-line)] pt-5">
+                            <div class="portfolio-inline-pair">
+                                <span class="truncate text-[var(--deu-ink-3)]">Services delivered</span>
+                                <span class="text-right text-[var(--deu-ink)]">Information architecture, multilingual UX, design system direction, content flow mapping</span>
+                            </div>
+                            <div class="portfolio-inline-pair">
+                                <span class="truncate text-[var(--deu-ink-3)]">Outcome</span>
+                                <span class="text-right text-[var(--deu-ink)]">A platform concept ready for cross-language growth without losing coherence.</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="portfolio-reveal portfolio-case-card" style="transition-delay: 120ms;">
+                        <div class="flex flex-wrap items-start justify-between gap-4">
+                            <div class="flex min-w-0 flex-col gap-3">
+                                <span class="portfolio-meta-line">Project 03 / Healthcare</span>
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">Healthcare workflow concept system</h3>
+                            </div>
+                            <span class="portfolio-sector-tag">Healthcare / smart coordination</span>
+                        </div>
+                        <p class="deu-body text-[var(--deu-ink-2)]">A concept system for appointments, care pathways, internal communication, and intelligent alerts, designed to preserve trust and legibility in high-stakes workflows.</p>
+                        <div class="grid gap-4 border-t border-[var(--deu-line)] pt-5">
+                            <div class="portfolio-inline-pair">
+                                <span class="truncate text-[var(--deu-ink-3)]">Services delivered</span>
+                                <span class="text-right text-[var(--deu-ink)]">Service mapping, interface concepts, information hierarchy, workflow modeling</span>
+                            </div>
+                            <div class="portfolio-inline-pair">
+                                <span class="truncate text-[var(--deu-ink-3)]">Outcome</span>
+                                <span class="text-right text-[var(--deu-ink)]">Complex care coordination translated into a clearer, more trusted digital layer.</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="portfolio-reveal portfolio-case-card portfolio-case-tall" style="transition-delay: 170ms;">
+                        <div class="flex flex-wrap items-start justify-between gap-4">
+                            <div class="flex min-w-0 flex-col gap-3">
+                                <span class="portfolio-meta-line">Project 04 / Private operations</span>
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">Premium client portal workspace</h3>
+                            </div>
+                            <span class="portfolio-sector-tag">Client services / workspace</span>
+                        </div>
+                        <p class="deu-body text-[var(--deu-ink-2)]">A private portal for clients who need live visibility into delivery, requests, approvals, and progress without entering a cold enterprise interface.</p>
+                        <div class="grid gap-4 border-t border-[var(--deu-line)] pt-5">
+                            <div class="portfolio-inline-pair">
+                                <span class="truncate text-[var(--deu-ink-3)]">Services delivered</span>
+                                <span class="text-right text-[var(--deu-ink)]">Portal UX, trust signaling, operational structure, premium interface detailing</span>
+                            </div>
+                            <div class="portfolio-inline-pair">
+                                <span class="truncate text-[var(--deu-ink-3)]">Outcome</span>
+                                <span class="text-right text-[var(--deu-ink)]">A quieter, more confident client experience with clearer operational touchpoints.</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="lens" class="border-b border-[var(--deu-line)]">
+            <div class="portfolio-shell py-16 lg:py-24">
+                <div class="portfolio-reveal grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(20rem,4fr)]">
+                    <div class="flex flex-col gap-5">
+                        <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Studio lens</h2>
+                        <p class="deu-body-lg max-w-[40rem] text-[var(--deu-ink-2)]">What defines the work is not a house style in the superficial sense. It is a way of composing technology so that systems feel legible, premium, and steady under pressure.</p>
+                    </div>
+                    <div class="portfolio-lens-essay">
+                        <p class="deu-body text-[var(--deu-ink)]">We prefer clarity to spectacle, but never at the expense of atmosphere. Our projects tend to hold tension between control and softness: black-led surfaces, precise lines, selective yellow emphasis, restrained red notation, and typography that reads like edited thought rather than promotional noise.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)_minmax(0,1fr)]">
+                    <article class="portfolio-reveal portfolio-lens-card">
+                        <span class="portfolio-note-kicker">Quality 01</span>
+                        <h3 class="deu-h2 text-[var(--deu-ink)]">Systems before screens</h3>
+                        <p class="deu-body text-[var(--deu-ink-2)]">The interface is treated as an expression of the underlying logic. We shape flows, dependencies, and operating realities before visual decoration enters the room.</p>
+                    </article>
+                    <article class="portfolio-reveal portfolio-lens-card lg:translate-y-10" style="transition-delay: 90ms;">
+                        <span class="portfolio-note-kicker">Quality 02</span>
+                        <h3 class="deu-h2 text-[var(--deu-ink)]">Editorial restraint</h3>
+                        <p class="deu-body text-[var(--deu-ink-2)]">Hierarchy comes from rhythm, spacing, contrast, and language economy. We avoid ornamental excess so that the work can hold authority for longer.</p>
+                    </article>
+                    <article class="portfolio-reveal portfolio-lens-card" style="transition-delay: 150ms;">
+                        <span class="portfolio-note-kicker">Quality 03</span>
+                        <h3 class="deu-h2 text-[var(--deu-ink)]">Operational elegance</h3>
+                        <p class="deu-body text-[var(--deu-ink-2)]">Whether the context is service logistics, education, or healthcare, the aim is the same: make difficult systems feel composed, trustworthy, and easier to act inside.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="portfolio-shell py-16 lg:py-24">
+                <div class="portfolio-reveal portfolio-cta">
+                    <div class="grid gap-8 lg:grid-cols-[minmax(0,6fr)_minmax(18rem,3fr)] lg:items-end">
+                        <div class="flex flex-col gap-5">
+                            <h2 class="deu-h1 max-w-[12ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">If the work needs both rigor and atmosphere, we should talk.</h2>
+                            <p class="deu-body-lg max-w-[38rem] text-[var(--deu-ink-2)]">Bring a platform idea, a workflow challenge, or a system that has grown noisier than it should be. We respond quietly, but with structure.</p>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <a href="mailto:hello@deuinnovation.com" class="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[var(--deu-primary)] px-6 py-3 text-sm font-semibold text-[var(--deu-primary-ink)] transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[var(--deu-primary-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--deu-primary)]">
+                                hello@deuinnovation.com
+                            </a>
+                            <p class="deu-body text-[var(--deu-ink-3)]">Quiet first contact, clear next steps, and a considered path into product work.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <style>
+      .portfolio-shell {
+        width: min(var(--deu-max-width), calc(100vw - 1.5rem));
+        margin-inline: auto;
+      }
+
+      .portfolio-aura {
+        position: absolute;
+        inset: -8% auto auto 8%;
+        width: min(44rem, 58vw);
+        height: min(44rem, 58vw);
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at center, color-mix(in srgb, var(--deu-primary) 16%, transparent) 0%, transparent 62%),
+          radial-gradient(circle at 68% 48%, color-mix(in srgb, var(--deu-flag-red) 28%, transparent) 0%, transparent 68%);
+        filter: blur(36px);
+        opacity: 0.8;
+        pointer-events: none;
+      }
+
+      .portfolio-feature-card,
+      .portfolio-support-card,
+      .portfolio-rail,
+      .portfolio-case-card,
+      .portfolio-lens-card,
+      .portfolio-cta,
+      .portfolio-note-panel,
+      .portfolio-lens-essay {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--deu-line);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 76%, transparent), transparent 100%),
+          var(--deu-surface);
+        box-shadow: var(--deu-shadow-1);
+      }
+
+      .portfolio-feature-card,
+      .portfolio-case-card,
+      .portfolio-lens-card,
+      .portfolio-cta {
+        border-radius: var(--deu-radius-lg);
+        padding: clamp(1.35rem, 2.3vw, 2rem);
+      }
+
+      .portfolio-support-card,
+      .portfolio-note-panel,
+      .portfolio-lens-essay {
+        border-radius: var(--deu-radius-md);
+        padding: 1.25rem;
+      }
+
+      .portfolio-rail {
+        display: grid;
+        gap: 1px;
+        border-radius: var(--deu-radius-md);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 8%, transparent), transparent 28%),
+          var(--deu-line);
+      }
+
+      .portfolio-rail-block {
+        display: grid;
+        gap: 0.85rem;
+        padding: 1.2rem;
+        background: var(--deu-surface);
+      }
+
+      .portfolio-meta-line,
+      .portfolio-note-kicker,
+      .portfolio-cell-label {
+        font-size: 0.78rem;
+        line-height: 1.45;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--deu-ink-3);
+      }
+
+      .portfolio-note-kicker {
+        color: var(--deu-primary);
+      }
+
+      .portfolio-stat {
+        font-family: var(--deu-font-display);
+        font-size: clamp(2.1rem, 4vw, 3.4rem);
+        line-height: 0.95;
+        color: var(--deu-ink);
+      }
+
+      .portfolio-diagram-grid {
+        display: grid;
+        gap: 1px;
+        border: 1px solid var(--deu-line);
+        background: var(--deu-line);
+        border-radius: var(--deu-radius-md);
+        overflow: hidden;
+      }
+
+      .portfolio-diagram-cell {
+        display: grid;
+        gap: 0.8rem;
+        padding: 1rem;
+        background: color-mix(in srgb, var(--deu-surface-2) 88%, transparent);
+      }
+
+      .portfolio-service-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+
+      .portfolio-chip,
+      .portfolio-sector-tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        border: 1px solid var(--deu-line);
+        background: var(--deu-panel);
+        color: var(--deu-ink);
+        font-size: 0.78rem;
+        line-height: 1.3;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .portfolio-chip {
+        border-radius: var(--deu-radius-md);
+        padding: 0.65rem 0.85rem;
+      }
+
+      .portfolio-sector-tag {
+        border-radius: var(--deu-radius-md);
+        padding: 0.7rem 0.9rem;
+        color: var(--deu-primary);
+      }
+
+      .portfolio-inline-pair {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 1rem;
+        min-width: 0;
+      }
+
+      .portfolio-inline-pair > span:last-child {
+        min-width: 0;
+      }
+
+      .portfolio-salon {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .portfolio-case-card {
+        display: grid;
+        gap: 1.25rem;
+        min-height: 18rem;
+      }
+
+      .portfolio-case-large,
+      .portfolio-case-offset,
+      .portfolio-case-tall {
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 8%, transparent), transparent 100%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 76%, transparent), transparent 100%),
+          var(--deu-surface);
+      }
+
+      .portfolio-lens-essay {
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 8%, transparent), transparent 34%),
+          var(--deu-surface-2);
+      }
+
+      .portfolio-cta {
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 10%, transparent), transparent 42%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 76%, transparent), transparent 100%),
+          var(--deu-surface);
+      }
+
+      .portfolio-reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 620ms cubic-bezier(.2,.8,.2,1), transform 620ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .portfolio-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (min-width: 768px) {
+        .portfolio-salon {
+          grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        }
+
+        .portfolio-case-large {
+          min-height: 22rem;
+        }
+
+        .portfolio-case-offset {
+          transform: translateY(2.5rem);
+        }
+
+        .portfolio-case-tall {
+          min-height: 23rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .portfolio-shell {
+          width: min(var(--deu-max-width), calc(100vw - 2rem));
+        }
+
+        .portfolio-salon {
+          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+          align-items: start;
+        }
+
+        .portfolio-case-large {
+          grid-column: 1;
+        }
+
+        .portfolio-case-offset {
+          grid-column: 2;
+        }
+
+        .portfolio-case-tall {
+          grid-column: 2;
+          min-height: 26rem;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .portfolio-shell {
+          width: min(var(--deu-max-width), calc(100vw - 1rem));
+        }
+
+        .portfolio-inline-pair {
+          flex-direction: column;
+          gap: 0.4rem;
+        }
+
+        .portfolio-service-row {
+          gap: 0.5rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .portfolio-reveal,
+        .portfolio-case-offset {
+          transition-duration: 0.01ms !important;
+          transform: none !important;
+        }
+      }
+    </style>
+    <script>
+      const portfolioRevealNodes = document.querySelectorAll('.portfolio-reveal');
+      const portfolioReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!portfolioReducedMotion && 'IntersectionObserver' in window) {
+        const portfolioObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              portfolioObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+
+        portfolioRevealNodes.forEach((node) => portfolioObserver.observe(node));
+      } else {
+        portfolioRevealNodes.forEach((node) => node.classList.add('is-visible'));
+      }
+
+      lucide.createIcons();
+    </script>
+</body>
+</html>

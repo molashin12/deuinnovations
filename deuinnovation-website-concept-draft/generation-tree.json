@@ -1,0 +1,49 @@
+{
+  "root": {
+    "id": "root-project",
+    "type": "project",
+    "title": "DeuInnovation Website Concept",
+    "children": [
+      {
+        "id": "page-index",
+        "type": "page",
+        "title": "Home",
+        "htmlSrc": "pages/index.html",
+        "generationPath": [
+          "pages/index.html"
+        ],
+        "children": []
+      },
+      {
+        "id": "page-portfolio",
+        "type": "page",
+        "title": "Portfolio",
+        "htmlSrc": "pages/portfolio.html",
+        "generationPath": [
+          "pages/portfolio.html"
+        ],
+        "children": []
+      },
+      {
+        "id": "page-login",
+        "type": "page",
+        "title": "Login",
+        "htmlSrc": "pages/login.html",
+        "generationPath": [
+          "pages/login.html"
+        ],
+        "children": []
+      },
+      {
+        "id": "page-signup",
+        "type": "page",
+        "title": "Sign Up",
+        "htmlSrc": "pages/signup.html",
+        "generationPath": [
+          "pages/signup.html"
+        ],
+        "children": []
+      }
+    ]
+  }
+}

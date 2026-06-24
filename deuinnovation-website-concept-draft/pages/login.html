@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeuInnovation — Login</title>
+    <style id="theme-vars">
+:root,
+.light {
+  --deu-bg: #f2f0ea;
+  --deu-surface: #f6f4ee;
+  --deu-surface-2: #ece8df;
+  --deu-surface-3: #e2ddd2;
+  --deu-panel: rgba(17, 17, 18, 0.035);
+  --deu-panel-strong: rgba(17, 17, 18, 0.06);
+  --deu-ink: #151619;
+  --deu-foreground: #151619;
+  --deu-ink-2: rgba(21, 22, 25, 0.74);
+  --deu-ink-3: rgba(21, 22, 25, 0.44);
+  --deu-line: rgba(21, 22, 25, 0.1);
+  --deu-line-strong: rgba(21, 22, 25, 0.16);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFD633;
+  --deu-primary-soft: rgba(255, 204, 0, 0.18);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+  --deu-oxblood: #DD0000;
+  --deu-shadow-1: 0 18px 40px rgba(15, 17, 21, 0.07);
+  --deu-shadow-2: 0 30px 70px rgba(15, 17, 21, 0.08);
+  --deu-radius-sm: 4px;
+  --deu-radius-md: 8px;
+  --deu-radius-lg: 16px;
+  --deu-radius-pill: 999px;
+  --deu-max-width: 1360px;
+  --deu-font-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --deu-font-display: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.dark {
+  --deu-bg: #0e0f10;
+  --deu-surface: #151618;
+  --deu-surface-2: #1c1e21;
+  --deu-surface-3: #25282c;
+  --deu-panel: rgba(255, 255, 255, 0.035);
+  --deu-panel-strong: rgba(255, 255, 255, 0.07);
+  --deu-ink: #f6f2e8;
+  --deu-foreground: #f6f2e8;
+  --deu-ink-2: rgba(246, 242, 232, 0.78);
+  --deu-ink-3: rgba(246, 242, 232, 0.5);
+  --deu-line: rgba(246, 242, 232, 0.1);
+  --deu-line-strong: rgba(246, 242, 232, 0.17);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFE066;
+  --deu-primary-soft: rgba(255, 204, 0, 0.2);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+}
+
+body {
+  font-family: var(--deu-font-body);
+  background: var(--deu-bg);
+  color: var(--deu-ink);
+}
+
+.deu-display {
+  font-family: var(--deu-font-display);
+  font-size: clamp(3rem, 6vw, 6.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.deu-h1 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+}
+
+.deu-h2 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(1.55rem, 2.1vw, 2.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.deu-h3 {
+  font-family: var(--deu-font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.deu-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.deu-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.deu-caption {
+  font-size: 0.81rem;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-foreground: var(--deu-foreground);
+    --color-primary: var(--deu-primary);
+  }
+  @layer base {
+    body { background: var(--deu-surface); color: var(--deu-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <header class="auth-topbar">
+            <div class="auth-shell">
+                <div class="auth-topbar__bar">
+                    <div class="auth-topbar__cluster">
+                    <a href="./index.html" class="auth-backlink inline-flex items-center gap-2 whitespace-nowrap text-sm text-[var(--deu-ink-2)]">
+                        <i data-lucide="arrow-left" class="h-4 w-4"></i>
+                        <span>Home</span>
+                    </a>
+                    <span class="auth-divider" aria-hidden="true"></span>
+                    <a href="./index.html" class="auth-brand flex min-w-0 items-center gap-3 text-[var(--deu-ink)]" aria-label="DeuInnovation home">
+                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] text-sm font-semibold tracking-[0.18em] text-[var(--deu-primary)]">DI</span>
+                        <span class="auth-brand__copy">
+                            <span class="deu-h3 truncate">DeuInnovation</span>
+                            <span class="auth-brand__meta truncate">Member login</span>
+                        </span>
+                    </a>
+                    </div>
+
+                    <div class="auth-topbar__actions">
+                        <span class="auth-topbar__status">Secure entry</span>
+                        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">
+                            <span class="theme-toggle__track" aria-hidden="true">
+                                <span class="theme-toggle__thumb"></span>
+                                <span class="theme-toggle__glyph theme-toggle__glyph--sun">
+                                    <i data-lucide="sun-medium" class="h-3.5 w-3.5"></i>
+                                </span>
+                                <span class="theme-toggle__glyph theme-toggle__glyph--moon">
+                                    <i data-lucide="moon-star" class="h-3.5 w-3.5"></i>
+                                </span>
+                            </span>
+                            <span class="theme-toggle__label" data-theme-label>Light</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="auth-stage">
+            <div class="auth-shell">
+                <div class="auth-frame">
+                    <div class="auth-layout">
+                        <aside class="auth-note auth-reveal" aria-label="Access guidance">
+                            <div class="auth-note__surface">
+                                <p class="auth-note__label">Member access</p>
+                                <h1 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Login with the same calm precision as the rest of the system.</h1>
+                                <p class="deu-body-lg text-[var(--deu-ink-2)]">Private client spaces, operational workrooms, and internal DeuInnovation tools all enter through one quiet checkpoint.</p>
+                            </div>
+
+                            <div class="auth-note__stack">
+                                <article class="auth-trust-card">
+                                    <div class="auth-trust-card__icon">
+                                        <i data-lucide="shield-check" class="h-4 w-4"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <h2 class="deu-h3 text-[var(--deu-ink)]">Trusted sessions</h2>
+                                        <p class="deu-body text-[var(--deu-ink-2)]">Encrypted access, role-based entry, and deliberate session controls for client and team work.</p>
+                                    </div>
+                                </article>
+                                <article class="auth-trust-card">
+                                    <div class="auth-trust-card__icon">
+                                        <i data-lucide="building-2" class="h-4 w-4"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <h2 class="deu-h3 text-[var(--deu-ink)]">Workspace continuity</h2>
+                                        <p class="deu-body text-[var(--deu-ink-2)]">Move from briefing to delivery without leaving the same visual and operational language.</p>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="auth-footnote">
+                                <p class="deu-body text-[var(--deu-ink-3)]">If your team has been invited to a private workspace, use the email linked to that access. We keep new environments intentionally controlled.</p>
+                            </div>
+                        </aside>
+
+                        <div class="auth-panel auth-reveal" style="transition-delay: 90ms;">
+                            <div class="auth-panel__header">
+                                <div class="flex flex-col gap-3">
+                                    <p class="auth-panel__kicker">Login</p>
+                                    <h2 class="deu-h2 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Welcome back</h2>
+                                    <p class="deu-body text-[var(--deu-ink-2)]">Use your workspace email and password to continue.</p>
+                                </div>
+                                <a href="./portfolio.html" class="auth-panel__link">
+                                    View portfolio
+                                    <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+                                </a>
+                            </div>
+
+                            <form class="auth-form" action="#" method="post">
+                                <div class="auth-field">
+                                    <label for="login-email" class="auth-field__label">Email</label>
+                                    <div class="auth-field__control">
+                                        <span class="auth-field__icon" aria-hidden="true">
+                                            <i data-lucide="mail" class="h-4 w-4"></i>
+                                        </span>
+                                        <input id="login-email" name="email" type="email" autocomplete="email" placeholder="name@company.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="auth-field">
+                                    <div class="auth-field__row">
+                                        <label for="login-password" class="auth-field__label">Password</label>
+                                        <a href="#" class="auth-inline-link">Forgot password</a>
+                                    </div>
+                                    <div class="auth-field__control">
+                                        <span class="auth-field__icon" aria-hidden="true">
+                                            <i data-lucide="lock-keyhole" class="h-4 w-4"></i>
+                                        </span>
+                                        <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+                                    </div>
+                                </div>
+
+                                <div class="auth-form__meta">
+                                    <label class="auth-check">
+                                        <input type="checkbox" name="remember" value="true">
+                                        <span class="auth-check__box" aria-hidden="true"></span>
+                                        <span class="deu-body text-[var(--deu-ink-2)]">Remember me on this device</span>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="auth-primary-button">
+                                    Sign in
+                                    <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                                </button>
+                            </form>
+
+                            <div class="auth-secondary">
+                                <div class="auth-secondary__divider" aria-hidden="true">
+                                    <span></span>
+                                    <span>or continue with</span>
+                                    <span></span>
+                                </div>
+
+                                <div class="auth-secondary__actions">
+                                    <button type="button" class="auth-secondary-button">
+                                        <i data-lucide="briefcase-business" class="h-4 w-4"></i>
+                                        Workspace SSO
+                                    </button>
+                                    <button type="button" class="auth-secondary-button">
+                                        <i data-lucide="key-round" class="h-4 w-4"></i>
+                                        Secure invite link
+                                    </button>
+                                </div>
+
+                                <p class="deu-body text-[var(--deu-ink-2)]">
+                                    New here?
+                                    <a href="./signup.html" class="auth-inline-link auth-inline-link--strong">Create an account</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <style>
+      body {
+        background:
+          radial-gradient(circle at top left, color-mix(in srgb, var(--deu-primary-soft) 70%, transparent) 0%, transparent 34%),
+          radial-gradient(circle at 88% 14%, color-mix(in srgb, var(--deu-flag-red-soft) 70%, transparent) 0%, transparent 28%),
+          var(--deu-bg);
+        color: var(--deu-ink);
+      }
+
+      .auth-shell {
+        width: min(var(--deu-max-width), calc(100vw - 2rem));
+        margin-inline: auto;
+      }
+
+      .auth-topbar {
+        padding-block: clamp(0.8rem, 2vw, 1.25rem) 0;
+      }
+
+      .auth-topbar__bar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--deu-line-strong) 82%, transparent);
+        border-radius: calc(var(--deu-radius-pill) - 1px);
+        background:
+          radial-gradient(circle at left top, color-mix(in srgb, var(--deu-primary-soft) 92%, transparent) 0%, transparent 34%),
+          radial-gradient(circle at right center, color-mix(in srgb, var(--deu-panel-strong) 96%, transparent) 0%, transparent 40%),
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-surface) 74%, transparent), color-mix(in srgb, var(--deu-surface-2) 68%, transparent)),
+          color-mix(in srgb, var(--deu-bg) 58%, transparent);
+        box-shadow:
+          var(--deu-shadow-1),
+          inset 0 1px 0 color-mix(in srgb, var(--deu-surface) 90%, transparent);
+        backdrop-filter: blur(24px) saturate(145%);
+        padding: 0.7rem 0.82rem 0.7rem 0.78rem;
+      }
+
+      .auth-topbar__bar::before,
+      .auth-topbar__bar::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        border-radius: 999px;
+        filter: blur(18px);
+      }
+
+      .auth-topbar__bar::before {
+        inset: auto auto -1.6rem -1rem;
+        width: 8rem;
+        height: 3.8rem;
+        background: color-mix(in srgb, var(--deu-primary-soft) 82%, transparent);
+        opacity: 0.7;
+      }
+
+      .auth-topbar__bar::after {
+        inset: -1.2rem -0.8rem auto auto;
+        width: 7rem;
+        height: 3.4rem;
+        background: color-mix(in srgb, var(--deu-flag-red-soft) 42%, transparent);
+        opacity: 0.38;
+      }
+
+      .auth-topbar__cluster,
+      .auth-topbar__actions {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        min-width: 0;
+      }
+
+      .auth-topbar__cluster {
+        flex: 1 1 auto;
+        gap: 0.85rem;
+      }
+
+      .auth-topbar__actions {
+        gap: 0.7rem;
+        justify-content: flex-end;
+      }
+
+      .auth-brand,
+      .auth-backlink,
+      .auth-panel__link,
+      .auth-inline-link,
+      .auth-primary-button,
+      .auth-secondary-button,
+      .theme-toggle {
+        transition-property: transform, color, border-color, background-color, box-shadow, opacity;
+        transition-duration: 220ms;
+        transition-timing-function: cubic-bezier(.2,.8,.2,1);
+      }
+
+      .auth-backlink:hover,
+      .auth-panel__link:hover,
+      .auth-inline-link:hover,
+      .auth-primary-button:hover,
+      .auth-secondary-button:hover,
+      .theme-toggle:hover {
+        transform: translateY(-1px);
+      }
+
+      .auth-backlink {
+        border: 1px solid color-mix(in srgb, var(--deu-line) 92%, transparent);
+        border-radius: var(--deu-radius-pill);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 76%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 90%, transparent);
+        padding: 0.62rem 0.82rem;
+        text-decoration: none;
+        box-shadow: inset 0 1px 0 color-mix(in srgb, var(--deu-surface) 92%, transparent);
+      }
+
+      .auth-divider {
+        width: 1px;
+        height: 2rem;
+        background: color-mix(in srgb, var(--deu-line-strong) 78%, transparent);
+      }
+
+      .auth-brand {
+        text-decoration: none;
+      }
+
+      .auth-brand__copy {
+        display: grid;
+        gap: 0.08rem;
+        min-width: 0;
+      }
+
+      .auth-brand__meta {
+        font-size: 0.72rem;
+        line-height: 1.2;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--deu-ink-3);
+      }
+
+      .auth-topbar__status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.35rem;
+        white-space: nowrap;
+        border: 1px solid color-mix(in srgb, var(--deu-primary) 20%, var(--deu-line));
+        border-radius: var(--deu-radius-pill);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary-soft) 92%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 88%, transparent);
+        padding: 0.55rem 0.88rem;
+        font-size: 0.72rem;
+        line-height: 1;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--deu-ink-2);
+      }
+
+      .theme-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.72rem;
+        min-width: 0;
+        border: 1px solid var(--deu-line);
+        border-radius: 999px;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 82%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 92%, transparent);
+        color: var(--deu-ink);
+        box-shadow: var(--deu-shadow-1);
+        padding: 0.32rem 0.42rem 0.32rem 0.34rem;
+      }
+
+      .theme-toggle:focus-visible,
+      .auth-backlink:focus-visible,
+      .auth-panel__link:focus-visible,
+      .auth-inline-link:focus-visible,
+      .auth-primary-button:focus-visible,
+      .auth-secondary-button:focus-visible,
+      .auth-field__control:focus-within,
+      .auth-check:focus-within {
+        outline: 2px solid var(--deu-primary);
+        outline-offset: 2px;
+      }
+
+      .theme-toggle__track {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.9rem;
+        width: 4.35rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--deu-panel-strong) 88%, transparent);
+        border: 1px solid color-mix(in srgb, var(--deu-line-strong) 78%, transparent);
+        padding: 0.22rem 0.4rem;
+      }
+
+      .theme-toggle__thumb {
+        position: absolute;
+        top: 0.18rem;
+        left: 0.2rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 999px;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 28%, white), var(--deu-primary));
+        box-shadow: 0 10px 22px color-mix(in srgb, var(--deu-primary) 24%, transparent);
+      }
+
+      .dark .theme-toggle__thumb {
+        transform: translateX(2.15rem);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-surface-3) 92%, white), var(--deu-surface-2));
+        box-shadow: 0 10px 22px color-mix(in srgb, var(--deu-foreground) 12%, transparent);
+      }
+
+      .theme-toggle__glyph {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--deu-ink-3);
+      }
+
+      .light .theme-toggle__glyph--sun,
+      .dark .theme-toggle__glyph--moon {
+        color: var(--deu-primary-ink);
+      }
+
+      .theme-toggle__label {
+        min-width: 2.85rem;
+        white-space: nowrap;
+        font-size: 0.76rem;
+        line-height: 1;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--deu-ink-2);
+      }
+
+      .auth-stage {
+        padding-block: clamp(1.25rem, 4vw, 2.5rem);
+      }
+
+      .auth-frame {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--deu-line);
+        border-radius: calc(var(--deu-radius-lg) + 8px);
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 7%, transparent), transparent 42%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 74%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 96%, transparent);
+        box-shadow: var(--deu-shadow-2);
+      }
+
+      .auth-frame::before,
+      .auth-frame::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+        filter: blur(22px);
+      }
+
+      .auth-frame::before {
+        width: min(22rem, 38vw);
+        height: min(22rem, 38vw);
+        top: -4rem;
+        left: -4rem;
+        background: color-mix(in srgb, var(--deu-primary-soft) 78%, transparent);
+        opacity: 0.8;
+      }
+
+      .auth-frame::after {
+        width: min(18rem, 30vw);
+        height: min(18rem, 30vw);
+        right: -2rem;
+        bottom: -3rem;
+        background: color-mix(in srgb, var(--deu-panel-strong) 86%, transparent);
+        opacity: 0.9;
+      }
+
+      .auth-layout {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 1.2rem;
+        padding: 1rem;
+      }
+
+      .auth-note,
+      .auth-panel {
+        min-width: 0;
+        border: 1px solid var(--deu-line);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 76%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 94%, transparent);
+        box-shadow: var(--deu-shadow-1);
+      }
+
+      .auth-note {
+        display: grid;
+        gap: 1.4rem;
+        border-radius: calc(var(--deu-radius-lg) + 2px);
+        padding: clamp(1.35rem, 3vw, 2.1rem);
+      }
+
+      .auth-note__surface,
+      .auth-note__stack,
+      .auth-panel__header,
+      .auth-form,
+      .auth-secondary {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .auth-note__label,
+      .auth-panel__kicker {
+        margin: 0;
+        font-size: 0.76rem;
+        line-height: 1.45;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .auth-note__label {
+        color: var(--deu-primary);
+      }
+
+      .auth-panel__kicker {
+        color: var(--deu-ink-3);
+      }
+
+      .auth-trust-card {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.95rem;
+        align-items: start;
+        min-width: 0;
+        border-top: 1px solid var(--deu-line);
+        padding-top: 1rem;
+      }
+
+      .auth-trust-card__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.35rem;
+        height: 2.35rem;
+        border-radius: var(--deu-radius-md);
+        border: 1px solid color-mix(in srgb, var(--deu-primary) 34%, var(--deu-line));
+        background: color-mix(in srgb, var(--deu-primary-soft) 90%, transparent);
+        color: var(--deu-primary-ink);
+      }
+
+      .auth-footnote {
+        border-top: 1px solid var(--deu-line);
+        padding-top: 1rem;
+      }
+
+      .auth-panel {
+        border-radius: calc(var(--deu-radius-lg) + 2px);
+        padding: clamp(1.35rem, 3vw, 2rem);
+      }
+
+      .auth-panel__header {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .auth-panel__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        justify-self: start;
+        white-space: nowrap;
+        color: var(--deu-ink-2);
+        text-decoration: none;
+      }
+
+      .auth-form {
+        margin-top: 0.15rem;
+      }
+
+      .auth-field {
+        display: grid;
+        gap: 0.62rem;
+      }
+
+      .auth-field__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-width: 0;
+      }
+
+      .auth-field__label {
+        font-size: 0.82rem;
+        line-height: 1.4;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--deu-ink-3);
+      }
+
+      .auth-field__control {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 0.8rem;
+        min-width: 0;
+        border: 1px solid var(--deu-line);
+        border-radius: calc(var(--deu-radius-md) + 2px);
+        background: color-mix(in srgb, var(--deu-panel) 96%, transparent);
+        padding: 0.95rem 1rem;
+      }
+
+      .auth-field__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--deu-ink-3);
+      }
+
+      .auth-field input {
+        width: 100%;
+        min-width: 0;
+        border: 0;
+        outline: none;
+        background: transparent;
+        color: var(--deu-ink);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .auth-field input::placeholder {
+        color: var(--deu-ink-3);
+      }
+
+      .auth-form__meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-width: 0;
+      }
+
+      .auth-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.72rem;
+        min-width: 0;
+        cursor: pointer;
+      }
+
+      .auth-check input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .auth-check__box {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.15rem;
+        height: 1.15rem;
+        flex: 0 0 auto;
+        border-radius: 4px;
+        border: 1px solid var(--deu-line-strong);
+        background: color-mix(in srgb, var(--deu-panel) 94%, transparent);
+      }
+
+      .auth-check__box::after {
+        content: "";
+        width: 0.4rem;
+        height: 0.72rem;
+        border-right: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+        transform: rotate(40deg) translate(-1px, -1px);
+      }
+
+      .auth-check input:checked + .auth-check__box {
+        background: var(--deu-primary);
+        border-color: color-mix(in srgb, var(--deu-primary) 80%, var(--deu-line));
+      }
+
+      .auth-check input:checked + .auth-check__box::after {
+        border-right-color: var(--deu-primary-ink);
+        border-bottom-color: var(--deu-primary-ink);
+      }
+
+      .auth-primary-button,
+      .auth-secondary-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        min-width: 0;
+        white-space: nowrap;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .auth-primary-button {
+        background: var(--deu-primary);
+        color: var(--deu-primary-ink);
+        padding: 0.98rem 1.25rem;
+        box-shadow: 0 14px 28px color-mix(in srgb, var(--deu-primary) 18%, transparent);
+      }
+
+      .auth-primary-button:hover {
+        background: var(--deu-primary-strong);
+      }
+
+      .auth-secondary {
+        border-top: 1px solid var(--deu-line);
+        padding-top: 1.1rem;
+      }
+
+      .auth-secondary__divider {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 0.76rem;
+        line-height: 1.45;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--deu-ink-3);
+      }
+
+      .auth-secondary__divider span:first-child,
+      .auth-secondary__divider span:last-child {
+        display: block;
+        height: 1px;
+        background: var(--deu-line);
+      }
+
+      .auth-secondary__actions {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .auth-secondary-button {
+        justify-content: flex-start;
+        border-color: var(--deu-line);
+        background: color-mix(in srgb, var(--deu-panel) 96%, transparent);
+        color: var(--deu-ink);
+        padding: 0.9rem 1rem;
+      }
+
+      .auth-secondary-button:hover {
+        border-color: var(--deu-line-strong);
+        background: color-mix(in srgb, var(--deu-panel-strong) 96%, transparent);
+      }
+
+      .auth-inline-link {
+        color: var(--deu-ink-2);
+        text-decoration: none;
+      }
+
+      .auth-inline-link--strong {
+        color: var(--deu-ink);
+      }
+
+      .auth-reveal {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      body.is-ready .auth-reveal {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (min-width: 980px) {
+        .auth-layout {
+          grid-template-columns: minmax(0, 1.05fr) minmax(23rem, 0.95fr);
+          align-items: stretch;
+          padding: 1.15rem;
+        }
+
+        .auth-panel__header {
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: end;
+        }
+      }
+
+      @media (max-width: 979px) {
+        .auth-shell {
+          width: min(var(--deu-max-width), calc(100vw - 1.35rem));
+        }
+
+        .auth-topbar__bar {
+          gap: 0.8rem;
+          padding-inline: 0.72rem;
+        }
+
+        .auth-backlink span {
+          display: none;
+        }
+
+        .auth-divider {
+          display: none;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .auth-topbar .auth-shell {
+          width: min(var(--deu-max-width), calc(100vw - 1rem));
+        }
+
+        .auth-shell {
+          width: min(var(--deu-max-width), calc(100vw - 1rem));
+        }
+
+        .auth-stage {
+          padding-block: 0.85rem 1rem;
+        }
+
+        .auth-topbar {
+          padding-top: 0.65rem;
+        }
+
+        .auth-topbar__bar {
+          flex-wrap: wrap;
+          border-radius: calc(var(--deu-radius-lg) + var(--deu-radius-md));
+          padding: 0.7rem;
+        }
+
+        .auth-topbar__cluster,
+        .auth-topbar__actions {
+          width: 100%;
+        }
+
+        .auth-topbar__actions {
+          justify-content: space-between;
+        }
+
+        .auth-brand__meta {
+          display: none;
+        }
+
+        .auth-layout {
+          padding: 0.85rem;
+        }
+
+        .theme-toggle {
+          gap: 0.5rem;
+          padding-right: 0.35rem;
+        }
+
+        .theme-toggle__label {
+          min-width: 2.2rem;
+          font-size: 0.7rem;
+        }
+
+        .auth-topbar__status {
+          min-height: 2.2rem;
+          padding-inline: 0.78rem;
+          font-size: 0.68rem;
+        }
+
+        .auth-panel,
+        .auth-note {
+          padding: 1.1rem;
+        }
+
+        .auth-trust-card {
+          grid-template-columns: 1fr;
+        }
+
+        .auth-form__meta,
+        .auth-field__row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 479px) {
+        .auth-topbar__status {
+          display: none;
+        }
+
+        .auth-topbar__actions {
+          justify-content: flex-end;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .auth-brand,
+        .auth-backlink,
+        .auth-panel__link,
+        .auth-inline-link,
+        .auth-primary-button,
+        .auth-secondary-button,
+        .theme-toggle,
+        .theme-toggle__thumb,
+        .theme-toggle__glyph,
+        .auth-reveal {
+          transition-duration: 0.01ms !important;
+        }
+
+        .auth-reveal,
+        body.is-ready .auth-reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+    <script>
+      lucide.createIcons();
+
+      const themeKey = 'deu-theme';
+      const root = document.documentElement;
+      const themeToggle = document.querySelector('[data-theme-toggle]');
+      const themeLabel = document.querySelector('[data-theme-label]');
+
+      const setTheme = (theme, options = {}) => {
+        if (theme !== 'light' && theme !== 'dark') {
+          return;
+        }
+
+        root.classList.remove('light', 'dark');
+        root.classList.add(theme);
+
+        if (themeToggle) {
+          const isDark = theme === 'dark';
+          themeToggle.setAttribute('aria-pressed', String(isDark));
+          themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        if (themeLabel) {
+          themeLabel.textContent = theme === 'dark' ? 'Dark' : 'Light';
+        }
+
+        if (options.persist) {
+          try {
+            localStorage.setItem(themeKey, theme);
+          } catch (error) {
+          }
+        }
+      };
+
+      setTheme(root.classList.contains('dark') ? 'dark' : 'light');
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const nextTheme = root.classList.contains('dark') ? 'light' : 'dark';
+          setTheme(nextTheme, { persist: true });
+        });
+      }
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!reduceMotion) {
+        requestAnimationFrame(() => {
+          document.body.classList.add('is-ready');
+        });
+      } else {
+        document.body.classList.add('is-ready');
+      }
+    </script>
+</body>
+</html>

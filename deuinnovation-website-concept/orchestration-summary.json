@@ -1,0 +1,88 @@
+{
+  "project": {
+    "name": "DeuInnovation Website Concept",
+    "slug": "deuinnovation-website-concept",
+    "dashboardMode": false,
+    "designProjectPath": "c:\\Users\\molas\\Documents\\trae_projects\\DeuInnovations\\deuinnovation-website-concept",
+    "generationTree": {
+      "root": {
+        "id": "root-project",
+        "type": "project",
+        "children": [
+          {
+            "id": "page-index",
+            "type": "page",
+            "title": "Home",
+            "htmlSrc": "pages/index.html",
+            "children": []
+          },
+          {
+            "id": "page-portfolio",
+            "type": "page",
+            "title": "Portfolio",
+            "htmlSrc": "pages/portfolio.html",
+            "children": []
+          }
+        ]
+      }
+    }
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "libraryIdentity": null,
+    "designRead": [
+      "dark-neutral editorial landing page",
+      "premium asymmetry with lateral movement",
+      "portfolio-led innovation studio presentation"
+    ],
+    "designDials": {
+      "layoutVariance": 5,
+      "motionIntensity": 4,
+      "visualDensity": 3
+    },
+    "styleContinuityAnchors": {
+      "colorSystem": "obsidian and graphite neutrals with a single warm metallic gold brand hue",
+      "shapeSystem": "architectural panels with restrained rounded corners and long horizontal lines",
+      "typographySystem": "clean sans serif with display-weight contrast and editorial spacing",
+      "spacingSystem": "broad vertical breathing room with tight internal precision",
+      "componentLanguage": "quiet premium controls, framed cards, floating planes, disciplined chips",
+      "surfaceAndDepth": "dark layered surfaces with subtle glass film, soft lift, and restrained black-led contrast with yellow and red accents",
+      "imageryAndIconography": "no photography, no decorative icon tiles, abstract object-driven hero only",
+      "interactionTone": "deliberate, smooth, reduced, confident"
+    }
+  },
+  "pages": [
+    {
+      "nodeId": "page-index",
+      "title": "Home",
+      "htmlSrc": "pages/index.html",
+      "pageType": "showcase",
+      "language": "en",
+      "visualNorthStar": "A premium innovation studio landing page that feels engineered, multilingual, and future-facing without noise.",
+      "compositionPattern": "Asymmetric two-column with a horizontal portfolio rail",
+      "miniProgramStyle": false,
+      "chartsRequired": false,
+      "qualityRisks": [
+        "hero could become generic if too centered",
+        "horizontal rail must remain elegant on mobile",
+        "multilingual samples must feel intentional rather than mixed-language clutter"
+      ]
+    },
+    {
+      "nodeId": "page-portfolio",
+      "title": "Portfolio",
+      "htmlSrc": "pages/portfolio.html",
+      "pageType": "showcase",
+      "language": "en",
+      "visualNorthStar": "An elegant studio portfolio page with gallery-like composition, restrained contrast, and a refined sense of authorship.",
+      "compositionPattern": "Editorial gallery rhythm with offset panels and salon-style case study sequencing",
+      "miniProgramStyle": false,
+      "chartsRequired": false,
+      "qualityRisks": [
+        "must feel like a refined studio rather than a generic agency case-study list",
+        "needs strong asymmetry without losing clarity on mobile",
+        "must stay quieter than flashy portfolio templates"
+      ]
+    }
+  ]
+}

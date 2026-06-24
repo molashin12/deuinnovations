@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeuInnovation — Software Engineering and AI Systems</title>
+    <style id="theme-vars">
+:root {
+  --deu-bg: #111112;
+  --deu-surface: #17181a;
+  --deu-surface-2: #1e2023;
+  --deu-surface-3: #25282c;
+  --deu-panel: rgba(255, 255, 255, 0.03);
+  --deu-panel-strong: rgba(255, 255, 255, 0.06);
+  --deu-ink: #f3efe5;
+  --deu-foreground: #f3efe5;
+  --deu-ink-2: rgba(243, 239, 229, 0.76);
+  --deu-ink-3: rgba(243, 239, 229, 0.48);
+  --deu-line: rgba(243, 239, 229, 0.1);
+  --deu-line-strong: rgba(243, 239, 229, 0.16);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFD633;
+  --deu-primary-soft: rgba(255, 204, 0, 0.18);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+  --deu-oxblood: #DD0000;
+  --deu-shadow-1: 0 18px 40px rgba(0, 0, 0, 0.05);
+  --deu-shadow-2: 0 30px 70px rgba(0, 0, 0, 0.05);
+  --deu-radius-sm: 4px;
+  --deu-radius-md: 8px;
+  --deu-radius-lg: 16px;
+  --deu-radius-pill: 999px;
+  --deu-max-width: 1360px;
+  --deu-font-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --deu-font-display: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.dark {
+  --deu-bg: #0e0f10;
+  --deu-surface: #151618;
+  --deu-surface-2: #1c1e21;
+  --deu-surface-3: #25282c;
+  --deu-panel: rgba(255, 255, 255, 0.035);
+  --deu-panel-strong: rgba(255, 255, 255, 0.07);
+  --deu-ink: #f6f2e8;
+  --deu-foreground: #f6f2e8;
+  --deu-ink-2: rgba(246, 242, 232, 0.78);
+  --deu-ink-3: rgba(246, 242, 232, 0.5);
+  --deu-line: rgba(246, 242, 232, 0.1);
+  --deu-line-strong: rgba(246, 242, 232, 0.17);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFE066;
+  --deu-primary-soft: rgba(255, 204, 0, 0.2);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+}
+
+body {
+  font-family: var(--deu-font-body);
+  background: var(--deu-bg);
+  color: var(--deu-ink);
+}
+
+.deu-display {
+  font-family: var(--deu-font-display);
+  font-size: clamp(3rem, 6vw, 6.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.deu-h1 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+}
+
+.deu-h2 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(1.55rem, 2.1vw, 2.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.deu-h3 {
+  font-family: var(--deu-font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.deu-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.deu-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.deu-caption {
+  font-size: 0.81rem;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-foreground: var(--deu-foreground);
+    --color-primary: var(--deu-primary);
+  }
+  @layer base {
+    body { background: var(--deu-surface); color: var(--deu-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <header class="sticky top-0 z-50 border-b border-[var(--deu-line)] bg-[color-mix(in_srgb,var(--deu-bg)_82%,transparent)] backdrop-blur-xl">
+            <div class="deu-shell deu-topbar flex items-center justify-between gap-4 py-4">
+                <a href="#top" class="deu-brandmark flex items-center gap-3 text-[var(--deu-ink)]" data-dom-id="nav-home">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] text-sm font-semibold tracking-[0.18em] text-[var(--deu-primary)]">DI</span>
+                    <span class="deu-h3 whitespace-nowrap">DeuInnovation</span>
+                </a>
+                <nav class="hidden items-center gap-8 text-sm text-[var(--deu-ink-2)] lg:flex">
+                    <a href="#services" class="transition-colors duration-150 hover:text-[var(--deu-ink)] focus-visible:text-[var(--deu-ink)]" data-dom-id="nav-services">Services</a>
+                    <a href="#work" class="transition-colors duration-150 hover:text-[var(--deu-ink)] focus-visible:text-[var(--deu-ink)]" data-dom-id="nav-work">Work</a>
+                    <a href="#method" class="transition-colors duration-150 hover:text-[var(--deu-ink)] focus-visible:text-[var(--deu-ink)]" data-dom-id="nav-method">Method</a>
+                    <a href="#contact" class="transition-colors duration-150 hover:text-[var(--deu-ink)] focus-visible:text-[var(--deu-ink)]" data-dom-id="nav-contact">Contact</a>
+                </nav>
+                <div class="flex items-center gap-3">
+                    <div class="deu-lang-switch inline-flex items-center justify-center rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] p-1 text-xs text-[var(--deu-ink-2)]">
+                        <button type="button" class="inline-flex min-w-9 items-center justify-center whitespace-nowrap rounded-full bg-[var(--deu-primary)] px-2.5 py-2 font-medium text-[11px] text-[var(--deu-primary-ink)] transition-colors duration-150 sm:min-w-11 sm:px-3 sm:text-xs">EN</button>
+                        <button type="button" class="inline-flex min-w-9 items-center justify-center whitespace-nowrap rounded-full px-2.5 py-2 font-medium text-[11px] transition-colors duration-150 hover:bg-[var(--deu-panel-strong)] hover:text-[var(--deu-ink)] sm:min-w-11 sm:px-3 sm:text-xs">DE</button>
+                        <button type="button" class="inline-flex min-w-9 items-center justify-center whitespace-nowrap rounded-full px-2.5 py-2 font-medium text-[11px] transition-colors duration-150 hover:bg-[var(--deu-panel-strong)] hover:text-[var(--deu-ink)] sm:min-w-11 sm:px-3 sm:text-xs">AR</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="top" class="relative overflow-hidden border-b border-[var(--deu-line)]">
+            <div class="deu-ambient"></div>
+            <div class="deu-shell relative z-10 pt-14 pb-18 md:pt-20 lg:pt-24 lg:pb-24">
+                <div class="deu-hero-grid">
+                    <div class="deu-reveal flex flex-col gap-8">
+                        <div class="flex flex-wrap gap-3">
+                            <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-4 py-2 text-xs uppercase tracking-[0.18em] text-[var(--deu-primary)]">Founded by three partners</span>
+                            <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[color-mix(in_srgb,var(--deu-flag-red)_36%,var(--deu-line))] bg-[color-mix(in_srgb,var(--deu-flag-red-soft)_50%,transparent)] px-4 py-2 text-xs uppercase tracking-[0.18em] text-[color-mix(in_srgb,var(--deu-flag-red)_74%,white)]">Software engineering + AI systems</span>
+                        </div>
+                        <div class="flex flex-col gap-6">
+                            <h1 class="deu-display max-w-[9ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Elegant digital infrastructure</h1>
+                            <p class="deu-body-lg max-w-[40rem] text-[var(--deu-ink-2)]">DeuInnovation builds web products, mobile platforms, and automation systems for businesses that want technical depth without visual noise. We shape ambitious work into precise software, calm interfaces, and smart operational layers that feel considered from first click to final deployment.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#contact" data-dom-id="cta-hero-brief" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[var(--deu-primary)] px-6 py-3 text-sm font-semibold text-[var(--deu-primary-ink)] transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[var(--deu-primary-strong)] hover:shadow-[var(--deu-shadow-1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--deu-primary)]">
+                                Start a brief
+                                <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+                            </a>
+                            <a href="#work" data-dom-id="cta-hero-work" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-6 py-3 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:bg-[var(--deu-panel-strong)] hover:text-[var(--deu-primary-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--deu-primary)]">
+                                Selected work
+                                <i data-lucide="move-right" class="h-4 w-4"></i>
+                            </a>
+                        </div>
+                        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                            <article class="deu-mini-metric">
+                                <span class="deu-h3 text-[var(--deu-ink)]">Three founders</span>
+                                <p class="deu-body text-[var(--deu-ink-2)]">Founder-led delivery from first workshop to release review.</p>
+                            </article>
+                            <article class="deu-mini-metric">
+                                <span class="deu-h3 text-[var(--deu-ink)]">Product rigor</span>
+                                <p class="deu-body text-[var(--deu-ink-2)]">Software engineering, web and mobile delivery, and platform structure.</p>
+                            </article>
+                            <article class="deu-mini-metric">
+                                <span class="deu-h3 text-[var(--deu-ink)]">Automation depth</span>
+                                <p class="deu-body text-[var(--deu-ink-2)]">AI systems that remove friction, reduce repetition, and sharpen decision flow.</p>
+                            </article>
+                            <article class="deu-mini-metric">
+                                <span class="deu-h3 text-[var(--deu-ink)]">Cross-market reach</span>
+                                <p class="deu-body text-[var(--deu-ink-2)]">English-first execution with visible readiness for German and Arabic contexts.</p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="deu-reveal lg:translate-y-4" style="transition-delay: 120ms;">
+                        <div class="deu-orb-scene" id="hero-scene">
+                            <div class="deu-stage-ring"></div>
+                            <div class="deu-stage-core">
+                                <div class="flex items-center justify-between gap-4">
+                                    <span class="deu-h3 text-[var(--deu-ink)]">DeuInnovation</span>
+                                    <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-2 text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">Studio</span>
+                                </div>
+                                <div class="grid gap-3 text-sm text-[var(--deu-ink-2)] md:grid-cols-3">
+                                    <div class="rounded-[var(--deu-radius-sm)] border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-3">Products</div>
+                                    <div class="rounded-[var(--deu-radius-sm)] border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-3">Automation</div>
+                                    <div class="rounded-[var(--deu-radius-sm)] border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-3">Expansion</div>
+                                </div>
+                            </div>
+                            <article class="deu-floating-plane deu-plane-a">
+                                <div class="flex items-center justify-between gap-4">
+                                    <h2 class="deu-h3 text-[var(--deu-ink)]">Software engineering</h2>
+                                    <i data-lucide="code-xml" class="h-4 w-4 text-[var(--deu-primary)]"></i>
+                                </div>
+                                <p class="deu-body text-[var(--deu-ink-2)]">Web applications, mobile products, system architecture, and product infrastructure with quiet precision.</p>
+                            </article>
+                            <article class="deu-floating-plane deu-plane-b">
+                                <div class="flex items-center justify-between gap-4">
+                                    <h2 class="deu-h3 text-[var(--deu-ink)]">AI automation</h2>
+                                    <i data-lucide="bot" class="h-4 w-4 text-[var(--deu-primary)]"></i>
+                                </div>
+                                <p class="deu-body text-[var(--deu-ink-2)]">Operational workflows, retrieval layers, process intelligence, and practical automations that earn their place.</p>
+                            </article>
+                            <article class="deu-floating-plane deu-plane-c">
+                                <div class="flex items-center justify-between gap-4">
+                                    <h2 class="deu-h3 text-[var(--deu-ink)]">Future domains</h2>
+                                    <i data-lucide="layers-3" class="h-4 w-4 text-[var(--deu-primary)]"></i>
+                                </div>
+                                <p class="deu-body text-[var(--deu-ink-2)]">Translation, e-learning, healthcare smart solutions, and new vertical systems built on the same discipline.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="border-b border-[var(--deu-line)]">
+            <div class="deu-shell py-18 lg:py-24">
+                <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+                    <div class="deu-reveal flex flex-col gap-5">
+                        <h2 class="deu-h1 max-w-[10ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Current work</h2>
+                        <p class="deu-body-lg max-w-[34rem] text-[var(--deu-ink-2)]">The studio is deliberately focused on two pillars. Both share the same operating standard: thoughtful architecture, refined interfaces, strong delivery hygiene, and an eye for business clarity.</p>
+                    </div>
+                    <div class="grid gap-6 lg:grid-cols-2">
+                        <article class="deu-reveal deu-service-card" style="transition-delay: 90ms;">
+                            <div class="flex items-center justify-between gap-4">
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">Software engineering</h3>
+                                <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-2 text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">Build</span>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink-2)]">We design and ship product foundations: responsive web experiences, mobile products, internal systems, and the technical infrastructure that makes a company easier to scale.</p>
+                            <ul class="grid gap-3 text-sm text-[var(--deu-ink)]">
+                                <li class="deu-list-row"><i data-lucide="layout-template" class="h-4 w-4 text-[var(--deu-primary)]"></i><span class="truncate">Product architecture and interface systems</span></li>
+                                <li class="deu-list-row"><i data-lucide="smartphone" class="h-4 w-4 text-[var(--deu-primary)]"></i><span class="truncate">Web and mobile applications with shared design logic</span></li>
+                                <li class="deu-list-row"><i data-lucide="server-cog" class="h-4 w-4 text-[var(--deu-primary)]"></i><span class="truncate">Operational platforms, portals, and system integrations</span></li>
+                            </ul>
+                        </article>
+                        <article class="deu-reveal deu-service-card" style="transition-delay: 160ms;">
+                            <div class="flex items-center justify-between gap-4">
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">AI automation</h3>
+                                <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-2 text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">Scale</span>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink-2)]">We translate repetitive work into intelligent flows: AI-enabled operations, retrieval systems, support automations, and decision-support layers that feel useful rather than theatrical.</p>
+                            <ul class="grid gap-3 text-sm text-[var(--deu-ink)]">
+                                <li class="deu-list-row"><i data-lucide="workflow" class="h-4 w-4 text-[var(--deu-primary)]"></i><span class="truncate">Automation systems for internal operations and service teams</span></li>
+                                <li class="deu-list-row"><i data-lucide="database-zap" class="h-4 w-4 text-[var(--deu-primary)]"></i><span class="truncate">Knowledge retrieval, agent layers, and structured intelligence</span></li>
+                                <li class="deu-list-row"><i data-lucide="scan-search" class="h-4 w-4 text-[var(--deu-primary)]"></i><span class="truncate">Practical AI workflows grounded in business reality</span></li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="border-b border-[var(--deu-line)]">
+            <div class="deu-shell py-18 lg:py-24">
+                <div class="deu-reveal flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                    <div class="flex max-w-[38rem] flex-col gap-4">
+                        <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Selected work</h2>
+                        <p class="deu-body-lg text-[var(--deu-ink-2)]">A horizontal rail keeps the portfolio close to the movement of the page. Each concept compresses a complex build into one clear point of view: what it solved, how it moved, and where it could scale.</p>
+                    </div>
+                    <p class="deu-body whitespace-nowrap text-[var(--deu-ink-3)]">Swipe or scroll sideways</p>
+                </div>
+
+                <div class="deu-reveal mt-10 overflow-x-auto pb-3 no-scrollbar" style="transition-delay: 80ms;">
+                    <div class="deu-rail">
+                        <article class="deu-project-card">
+                            <div class="flex items-start justify-between gap-4">
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">Logistics command layer</h3>
+                                <span class="deu-project-index">01</span>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink-2)]">A dispatch and warehouse platform that turns fragmented operations into one readable system for managers, drivers, and customer-facing teams.</p>
+                            <div class="grid gap-3 text-sm text-[var(--deu-ink)]">
+                                <div class="deu-list-row"><span class="truncate">Role</span><span class="truncate text-[var(--deu-ink-2)]">Web platform + workflow design</span></div>
+                                <div class="deu-list-row"><span class="truncate">Focus</span><span class="truncate text-[var(--deu-ink-2)]">Operational visibility and faster decisions</span></div>
+                            </div>
+                            <a href="#contact" class="inline-flex items-center justify-center gap-2 self-start whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-5 py-3 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:text-[var(--deu-primary-strong)]">Discuss this build<i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                        </article>
+
+                        <article class="deu-project-card">
+                            <div class="flex items-start justify-between gap-4">
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">Field service mobile suite</h3>
+                                <span class="deu-project-index">02</span>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink-2)]">A mobile-first operating surface for technicians, approvals, and reporting, engineered to stay calm in low-connectivity and high-pressure environments.</p>
+                            <div class="grid gap-3 text-sm text-[var(--deu-ink)]">
+                                <div class="deu-list-row"><span class="truncate">Role</span><span class="truncate text-[var(--deu-ink-2)]">Mobile product + sync logic</span></div>
+                                <div class="deu-list-row"><span class="truncate">Focus</span><span class="truncate text-[var(--deu-ink-2)]">Field execution with clean system feedback</span></div>
+                            </div>
+                            <a href="#contact" class="inline-flex items-center justify-center gap-2 self-start whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-5 py-3 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:text-[var(--deu-primary-strong)]">Review concept<i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                        </article>
+
+                        <article class="deu-project-card">
+                            <div class="flex items-start justify-between gap-4">
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">Bilingual learning engine</h3>
+                                <span class="deu-project-index">03</span>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink-2)]">A future-facing learning environment where course structure, translation logic, and adaptive delivery live inside one coherent product foundation.</p>
+                            <div class="grid gap-3 text-sm text-[var(--deu-ink)]">
+                                <div class="deu-list-row"><span class="truncate">Role</span><span class="truncate text-[var(--deu-ink-2)]">Platform strategy + multilingual UX</span></div>
+                                <div class="deu-list-row"><span class="truncate">Focus</span><span class="truncate text-[var(--deu-ink-2)]">Learning flow, translation, and product clarity</span></div>
+                            </div>
+                            <a href="#contact" class="inline-flex items-center justify-center gap-2 self-start whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-5 py-3 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:text-[var(--deu-primary-strong)]">Explore scope<i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                        </article>
+
+                        <article class="deu-project-card">
+                            <div class="flex items-start justify-between gap-4">
+                                <h3 class="deu-h2 text-[var(--deu-ink)]">Clinical workflow compass</h3>
+                                <span class="deu-project-index">04</span>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink-2)]">A healthcare-oriented systems concept built around scheduling, care coordination, and intelligent alerts without losing calm or trust.</p>
+                            <div class="grid gap-3 text-sm text-[var(--deu-ink)]">
+                                <div class="deu-list-row"><span class="truncate">Role</span><span class="truncate text-[var(--deu-ink-2)]">Smart solution concept + interface system</span></div>
+                                <div class="deu-list-row"><span class="truncate">Focus</span><span class="truncate text-[var(--deu-ink-2)]">Clarity in complex, high-stakes environments</span></div>
+                            </div>
+                            <a href="#contact" class="inline-flex items-center justify-center gap-2 self-start whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-5 py-3 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:text-[var(--deu-primary-strong)]">Open dialogue<i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="method" class="border-b border-[var(--deu-line)]">
+            <div class="deu-shell py-18 lg:py-24">
+                <div class="deu-reveal flex flex-col gap-5 lg:max-w-[42rem]">
+                    <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Build method</h2>
+                    <p class="deu-body-lg text-[var(--deu-ink-2)]">Our process is paced like engineering, not theatre. Every stage tightens the signal, reduces ambiguity, and keeps decision-making readable for the client team and the studio alike.</p>
+                </div>
+
+                <div class="mt-12 grid gap-5 lg:grid-cols-2">
+                    <article class="deu-reveal deu-process-card">
+                        <div class="deu-process-number">01</div>
+                        <div class="flex flex-col gap-4">
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Frame</h3>
+                            <p class="deu-body text-[var(--deu-ink-2)]">We define the operating problem, the product horizon, and the systems that matter. Three partners stay visible here so the strategic frame is set early and clearly.</p>
+                        </div>
+                    </article>
+                    <article class="deu-reveal deu-process-card lg:translate-y-10" style="transition-delay: 90ms;">
+                        <div class="deu-process-number">02</div>
+                        <div class="flex flex-col gap-4">
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Prototype</h3>
+                            <p class="deu-body text-[var(--deu-ink-2)]">We turn ambiguity into tangible flows, interface logic, and interaction rhythm before deep implementation begins. The visual system is tested against the product reality, not moodboards.</p>
+                        </div>
+                    </article>
+                    <article class="deu-reveal deu-process-card" style="transition-delay: 140ms;">
+                        <div class="deu-process-number">03</div>
+                        <div class="flex flex-col gap-4">
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Engineer</h3>
+                            <p class="deu-body text-[var(--deu-ink-2)]">We build with architectural discipline, careful component logic, and production-minded delivery. The result is meant to last, scale, and remain understandable to the teams who inherit it.</p>
+                        </div>
+                    </article>
+                    <article class="deu-reveal deu-process-card lg:-translate-y-10" style="transition-delay: 210ms;">
+                        <div class="deu-process-number">04</div>
+                        <div class="flex flex-col gap-4">
+                            <h3 class="deu-h2 text-[var(--deu-ink)]">Evolve</h3>
+                            <p class="deu-body text-[var(--deu-ink-2)]">We refine around traction, operational feedback, and new opportunities. Expansion into translation, e-learning, or healthcare smart solutions remains grounded in the same build logic.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="multilingual" class="border-b border-[var(--deu-line)]">
+            <div class="deu-shell py-18 lg:py-24">
+                <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+                    <div class="deu-reveal flex flex-col gap-5">
+                        <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Cross-market fluency</h2>
+                        <p class="deu-body-lg text-[var(--deu-ink-2)]">The site speaks in English first, but the studio is built to move across language and market contexts. Product structure, stakeholder communication, and UI clarity are designed to carry across regions without losing tone.</p>
+                    </div>
+                    <div class="grid gap-5 md:grid-cols-3">
+                        <article class="deu-reveal deu-language-card" style="transition-delay: 80ms;">
+                            <div class="flex items-center justify-between gap-3">
+                                <h3 class="deu-h3 text-[var(--deu-ink)]">English</h3>
+                                <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-2 text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">EN</span>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink)]">“We structure the product before we scale it.”</p>
+                            <p class="deu-body text-[var(--deu-ink-2)]">Clear brief framing, stakeholder language, and product-facing copy.</p>
+                        </article>
+                        <article class="deu-reveal deu-language-card" style="transition-delay: 140ms;">
+                            <div class="flex items-center justify-between gap-3">
+                                <h3 class="deu-h3 text-[var(--deu-ink)]">German</h3>
+                                <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-2 text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">DE</span>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink)]">„Wir bauen klare Systeme, die mit dem Geschäft wachsen.“</p>
+                            <p class="deu-body text-[var(--deu-ink-2)]">Precise communication, structured documentation, and trustworthy product tone.</p>
+                        </article>
+                        <article class="deu-reveal deu-language-card" style="transition-delay: 200ms;">
+                            <div class="flex items-center justify-between gap-3">
+                                <h3 class="deu-h3 text-[var(--deu-ink)]">Arabic</h3>
+                                <span class="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-3 py-2 text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">AR</span>
+                            </div>
+                            <p class="deu-body text-right text-[var(--deu-ink)]" dir="rtl">"نصمم أنظمة رقمية واضحة تنمو مع العمل."</p>
+                            <p class="deu-body text-[var(--deu-ink-2)]">Thoughtful right-to-left handling, content readiness, and regional adaptability.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="border-b border-[var(--deu-line)]">
+            <div class="deu-shell py-18 lg:py-24">
+                <div class="deu-reveal flex flex-col gap-5 lg:max-w-[44rem]">
+                    <h2 class="deu-h1 text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Next horizons</h2>
+                    <p class="deu-body-lg text-[var(--deu-ink-2)]">Expansion is not about collecting categories. It is about applying the same design discipline, multilingual capability, and systems thinking to domains where clarity still has room to win.</p>
+                </div>
+                <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                    <article class="deu-reveal deu-future-card" style="transition-delay: 60ms;">
+                        <h3 class="deu-h3 text-[var(--deu-ink)]">Translation systems</h3>
+                        <p class="deu-body text-[var(--deu-ink-2)]">Workflow-led translation environments, terminology logic, and multilingual product support.</p>
+                    </article>
+                    <article class="deu-reveal deu-future-card" style="transition-delay: 110ms;">
+                        <h3 class="deu-h3 text-[var(--deu-ink)]">E-learning platforms</h3>
+                        <p class="deu-body text-[var(--deu-ink-2)]">Structured learning experiences, adaptive pathways, and teacher-facing product infrastructure.</p>
+                    </article>
+                    <article class="deu-reveal deu-future-card" style="transition-delay: 160ms;">
+                        <h3 class="deu-h3 text-[var(--deu-ink)]">Healthcare smart solutions</h3>
+                        <p class="deu-body text-[var(--deu-ink-2)]">Operational clarity for clinics, care journeys, scheduling, and high-trust interfaces.</p>
+                    </article>
+                    <article class="deu-reveal deu-future-card" style="transition-delay: 210ms;">
+                        <h3 class="deu-h3 text-[var(--deu-ink)]">Decision support layers</h3>
+                        <p class="deu-body text-[var(--deu-ink-2)]">Practical intelligence systems that help teams route work, surface signals, and respond faster.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="relative overflow-hidden">
+            <div class="deu-shell py-18 lg:py-24">
+                <div class="deu-reveal deu-contact-panel">
+                    <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+                        <div class="flex flex-col gap-6">
+                            <h2 class="deu-display max-w-[10ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">Start the conversation</h2>
+                            <p class="deu-body-lg max-w-[36rem] text-[var(--deu-ink-2)]">Bring a product idea, a platform challenge, or an automation brief. We answer with structure, practical next moves, and a build path that feels proportionate to the work.</p>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="mailto:hello@deuinnovation.com" data-dom-id="cta-contact-mail" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[var(--deu-primary)] px-6 py-3 text-sm font-semibold text-[var(--deu-primary-ink)] transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[var(--deu-primary-strong)] hover:shadow-[var(--deu-shadow-1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--deu-primary)]">
+                                    Email the studio
+                                    <i data-lucide="send" class="h-4 w-4"></i>
+                                </a>
+                                <a href="#services" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-6 py-3 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:text-[var(--deu-primary-strong)]">
+                                    Review services
+                                    <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                                </a>
+                            </div>
+                            <p class="deu-body text-[var(--deu-ink-3)]">hello@deuinnovation.com</p>
+                        </div>
+                        <div class="grid gap-4 text-sm text-[var(--deu-ink)]">
+                            <div class="deu-list-row-lg">
+                                <span class="truncate">Best fit</span>
+                                <span class="truncate text-[var(--deu-ink-2)]">Founder-led products, internal platforms, smart operational systems</span>
+                            </div>
+                            <div class="deu-list-row-lg">
+                                <span class="truncate">Studio profile</span>
+                                <span class="truncate text-[var(--deu-ink-2)]">Technical, multilingual, design-conscious, future-facing</span>
+                            </div>
+                            <div class="deu-list-row-lg">
+                                <span class="truncate">Engagement style</span>
+                                <span class="truncate text-[var(--deu-ink-2)]">Clear scope, working prototypes, disciplined implementation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="border-t border-[var(--deu-line)]">
+                <div class="deu-shell flex flex-col gap-4 py-6 text-sm text-[var(--deu-ink-3)] md:flex-row md:items-center md:justify-between">
+                    <p class="truncate">DeuInnovation — a three-partner innovation studio for products, systems, and intelligent operations.</p>
+                    <div class="flex items-center gap-4">
+                        <a href="#top" class="transition-colors duration-150 hover:text-[var(--deu-ink)]">Back to top</a>
+                        <span class="truncate">EN / DE / AR ready</span>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </main>
+    <style>
+      .deu-shell {
+        width: min(var(--deu-max-width), calc(100vw - 2rem));
+        margin-inline: auto;
+      }
+
+      .deu-ambient {
+        position: absolute;
+        inset: -10% auto auto 12%;
+        width: min(48vw, 40rem);
+        height: min(48vw, 40rem);
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at center, color-mix(in srgb, var(--deu-primary) 18%, transparent) 0%, transparent 66%),
+          radial-gradient(circle at 65% 40%, color-mix(in srgb, var(--deu-flag-red) 35%, transparent) 0%, transparent 72%);
+        filter: blur(28px);
+        opacity: 0.85;
+        pointer-events: none;
+      }
+
+      .deu-hero-grid {
+        display: grid;
+        gap: 3rem;
+      }
+
+      .deu-mini-metric,
+      .deu-service-card,
+      .deu-language-card,
+      .deu-future-card,
+      .deu-project-card,
+      .deu-contact-panel,
+      .deu-process-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--deu-line);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 78%, transparent), transparent 100%),
+          var(--deu-surface);
+        box-shadow: var(--deu-shadow-1);
+      }
+
+      .deu-mini-metric,
+      .deu-language-card,
+      .deu-future-card {
+        border-radius: var(--deu-radius-md);
+        padding: 1.2rem;
+      }
+
+      .deu-service-card,
+      .deu-project-card,
+      .deu-process-card {
+        border-radius: var(--deu-radius-lg);
+        padding: 1.6rem;
+      }
+
+      .deu-contact-panel {
+        border-radius: var(--deu-radius-lg);
+        padding: clamp(1.6rem, 3vw, 2.6rem);
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 10%, transparent), transparent 42%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 78%, transparent), transparent 100%),
+          var(--deu-surface);
+      }
+
+      .deu-list-row,
+      .deu-list-row-lg {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 0;
+        justify-content: space-between;
+      }
+
+      .deu-list-row-lg {
+        gap: 1rem;
+        border-top: 1px solid var(--deu-line);
+        padding-top: 1rem;
+      }
+
+      .deu-project-index {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 3rem;
+        height: 3rem;
+        white-space: nowrap;
+        border-radius: 999px;
+        border: 1px solid var(--deu-line);
+        background: var(--deu-panel);
+        color: var(--deu-primary);
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+      }
+
+      .deu-rail {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(19rem, 26rem);
+        gap: 1rem;
+        min-width: max-content;
+        padding-right: 1rem;
+      }
+
+      .deu-project-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        min-height: 28rem;
+        scroll-snap-align: start;
+        transition-property: transform, border-color, background-color, box-shadow;
+        transition-duration: 180ms;
+        transition-timing-function: cubic-bezier(.2,.8,.2,1);
+      }
+
+      .deu-project-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--deu-line-strong);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 7%, transparent), transparent 100%),
+          var(--deu-surface-2);
+      }
+
+      .deu-process-card {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: start;
+        gap: 1.3rem;
+        min-height: 15rem;
+      }
+
+      .deu-process-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 4rem;
+        height: 4rem;
+        white-space: nowrap;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--deu-primary) 14%, transparent);
+        border: 1px solid color-mix(in srgb, var(--deu-primary) 34%, var(--deu-line));
+        color: var(--deu-primary-strong);
+        font-family: var(--deu-font-display);
+        font-size: 1rem;
+        letter-spacing: 0.16em;
+      }
+
+      .deu-orb-scene {
+        --hero-shift-x: 0px;
+        --hero-shift-y: 0px;
+        position: relative;
+        min-height: 41rem;
+        border-radius: var(--deu-radius-lg);
+        border: 1px solid var(--deu-line);
+        background:
+          radial-gradient(circle at 20% 18%, color-mix(in srgb, var(--deu-primary) 12%, transparent) 0%, transparent 46%),
+          radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--deu-flag-red) 32%, transparent) 0%, transparent 44%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 70%, transparent), transparent 100%),
+          var(--deu-surface);
+        box-shadow: var(--deu-shadow-2);
+        overflow: hidden;
+        transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0);
+        transition: transform 220ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .deu-stage-ring,
+      .deu-stage-core,
+      .deu-floating-plane {
+        position: absolute;
+      }
+
+      .deu-stage-ring {
+        inset: 16% 9% auto;
+        height: 62%;
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, var(--deu-primary) 35%, var(--deu-line));
+        box-shadow:
+          inset 0 0 0 1px color-mix(in srgb, var(--deu-primary) 14%, transparent),
+          0 0 80px color-mix(in srgb, var(--deu-primary) 8%, transparent);
+      }
+
+      .deu-stage-core {
+        left: 12%;
+        right: 12%;
+        bottom: 12%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: var(--deu-radius-lg);
+        border: 1px solid var(--deu-line);
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 10%, transparent), transparent 36%),
+          var(--deu-panel);
+        backdrop-filter: blur(14px);
+        padding: 1.3rem;
+      }
+
+      .deu-floating-plane {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: min(20rem, calc(100% - 3rem));
+        border-radius: var(--deu-radius-md);
+        border: 1px solid var(--deu-line-strong);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 95%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface-2) 88%, transparent);
+        backdrop-filter: blur(20px);
+        padding: 1.2rem;
+        box-shadow: var(--deu-shadow-1);
+      }
+
+      .deu-plane-a {
+        top: 10%;
+        left: 8%;
+        animation: deu-float 9s ease-in-out infinite;
+      }
+
+      .deu-plane-b {
+        top: 26%;
+        right: 6%;
+        animation: deu-float 11s ease-in-out infinite reverse;
+      }
+
+      .deu-plane-c {
+        left: 22%;
+        bottom: 27%;
+        animation: deu-float 10s ease-in-out infinite;
+      }
+
+      .deu-reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition-property: opacity, transform;
+        transition-duration: 700ms;
+        transition-timing-function: cubic-bezier(.2,.8,.2,1);
+      }
+
+      .deu-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes deu-float {
+        0%, 100% { transform: translate3d(0, 0, 0); }
+        50% { transform: translate3d(0, -10px, 0); }
+      }
+
+      @media (min-width: 1024px) {
+        .deu-hero-grid {
+          grid-template-columns: minmax(0, 7fr) minmax(26rem, 5fr);
+          align-items: end;
+        }
+      }
+
+      @media (max-width: 1023px) {
+        .deu-orb-scene {
+          min-height: 34rem;
+        }
+
+        .deu-plane-c {
+          left: 10%;
+          bottom: 30%;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .deu-shell {
+          width: min(var(--deu-max-width), calc(100vw - 1.25rem));
+        }
+
+        .deu-topbar {
+          gap: 0.75rem;
+        }
+
+        .deu-brandmark {
+          gap: 0.6rem;
+          min-width: 0;
+        }
+
+        .deu-brandmark .deu-h3 {
+          font-size: 0.95rem;
+        }
+
+        .deu-lang-switch {
+          transform: scale(0.96);
+          transform-origin: right center;
+        }
+
+        .deu-rail {
+          grid-auto-columns: minmax(17rem, 86vw);
+        }
+
+        .deu-orb-scene {
+          min-height: 28rem;
+        }
+
+        .deu-stage-ring {
+          inset: 18% 6% auto;
+          height: 52%;
+        }
+
+        .deu-stage-core {
+          left: 7%;
+          right: 7%;
+          bottom: 8%;
+        }
+
+        .deu-floating-plane {
+          width: min(16rem, calc(100% - 1.5rem));
+        }
+
+        .deu-plane-a {
+          top: 8%;
+          left: 4%;
+        }
+
+        .deu-plane-b {
+          top: 24%;
+          right: 3%;
+        }
+
+        .deu-plane-c {
+          left: 4%;
+          bottom: 30%;
+        }
+
+        .deu-process-card {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        .deu-process-number {
+          min-width: 3.25rem;
+          height: 3.25rem;
+        }
+      }
+
+      @media (max-width: 479px) {
+        .deu-shell {
+          width: min(var(--deu-max-width), calc(100vw - 1rem));
+        }
+
+        .deu-stage-core {
+          left: 0.9rem;
+          right: 0.9rem;
+          bottom: 0.9rem;
+        }
+
+        .deu-floating-plane {
+          width: min(14rem, calc(100% - 1.25rem));
+          padding: 0.95rem;
+        }
+
+        .deu-rail {
+          grid-auto-columns: minmax(15.5rem, 88vw);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .deu-reveal,
+        .deu-project-card,
+        .deu-orb-scene,
+        .deu-floating-plane,
+        .deu-plane-a,
+        .deu-plane-b,
+        .deu-plane-c {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+          transform: none !important;
+        }
+      }
+    </style>
+    <script>
+      lucide.createIcons();
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealNodes = document.querySelectorAll('.deu-reveal');
+
+      if (!reduceMotion && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+        revealNodes.forEach((node) => revealObserver.observe(node));
+      } else {
+        revealNodes.forEach((node) => node.classList.add('is-visible'));
+      }
+
+      const scene = document.getElementById('hero-scene');
+
+      if (scene && !reduceMotion) {
+        const handleMove = (event) => {
+          const rect = scene.getBoundingClientRect();
+          const relativeX = (event.clientX - rect.left) / rect.width - 0.5;
+          const relativeY = (event.clientY - rect.top) / rect.height - 0.5;
+          scene.style.setProperty('--hero-shift-x', `${relativeX * 10}px`);
+          scene.style.setProperty('--hero-shift-y', `${relativeY * 12}px`);
+        };
+
+        const resetMove = () => {
+          scene.style.setProperty('--hero-shift-x', '0px');
+          scene.style.setProperty('--hero-shift-y', '0px');
+        };
+
+        scene.addEventListener('pointermove', handleMove);
+        scene.addEventListener('pointerleave', resetMove);
+      }
+    </script>
+</body>
+</html>

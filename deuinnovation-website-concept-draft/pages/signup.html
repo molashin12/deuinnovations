@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeuInnovation — Sign Up</title>
+    <style id="theme-vars">
+:root,
+.light {
+  --deu-bg: #f2f0ea;
+  --deu-surface: #f6f4ee;
+  --deu-surface-2: #ece8df;
+  --deu-surface-3: #e2ddd2;
+  --deu-panel: rgba(17, 17, 18, 0.035);
+  --deu-panel-strong: rgba(17, 17, 18, 0.06);
+  --deu-ink: #151619;
+  --deu-foreground: #151619;
+  --deu-ink-2: rgba(21, 22, 25, 0.74);
+  --deu-ink-3: rgba(21, 22, 25, 0.44);
+  --deu-line: rgba(21, 22, 25, 0.1);
+  --deu-line-strong: rgba(21, 22, 25, 0.16);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFD633;
+  --deu-primary-soft: rgba(255, 204, 0, 0.18);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+  --deu-oxblood: #DD0000;
+  --deu-shadow-1: 0 18px 40px rgba(15, 17, 21, 0.07);
+  --deu-shadow-2: 0 30px 70px rgba(15, 17, 21, 0.08);
+  --deu-radius-sm: 4px;
+  --deu-radius-md: 8px;
+  --deu-radius-lg: 16px;
+  --deu-radius-pill: 999px;
+  --deu-max-width: 1360px;
+  --deu-font-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --deu-font-display: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.dark {
+  --deu-bg: #0e0f10;
+  --deu-surface: #151618;
+  --deu-surface-2: #1c1e21;
+  --deu-surface-3: #25282c;
+  --deu-panel: rgba(255, 255, 255, 0.035);
+  --deu-panel-strong: rgba(255, 255, 255, 0.07);
+  --deu-ink: #f6f2e8;
+  --deu-foreground: #f6f2e8;
+  --deu-ink-2: rgba(246, 242, 232, 0.78);
+  --deu-ink-3: rgba(246, 242, 232, 0.5);
+  --deu-line: rgba(246, 242, 232, 0.1);
+  --deu-line-strong: rgba(246, 242, 232, 0.17);
+  --deu-primary: #FFCC00;
+  --deu-primary-strong: #FFE066;
+  --deu-primary-soft: rgba(255, 204, 0, 0.2);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+}
+
+body {
+  font-family: var(--deu-font-body);
+  background: var(--deu-bg);
+  color: var(--deu-ink);
+}
+
+.deu-display {
+  font-family: var(--deu-font-display);
+  font-size: clamp(3rem, 6vw, 6.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.deu-h1 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+}
+
+.deu-h2 {
+  font-family: var(--deu-font-display);
+  font-size: clamp(1.55rem, 2.1vw, 2.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.deu-h3 {
+  font-family: var(--deu-font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.deu-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.deu-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.deu-caption {
+  font-size: 0.81rem;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-foreground: var(--deu-foreground);
+    --color-primary: var(--deu-primary);
+  }
+  @layer base {
+    body { background: var(--deu-surface); color: var(--deu-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+      <header class="relative pt-4 sm:pt-5 lg:pt-6">
+        <div class="deu-auth-shell">
+          <div class="flex flex-wrap items-center gap-3 rounded-[2rem] border border-[var(--deu-line)] px-3 py-3 sm:flex-nowrap sm:justify-between sm:px-4 sm:py-3.5 lg:px-5" style="background: linear-gradient(180deg, color-mix(in srgb, var(--deu-surface) 84%, transparent), color-mix(in srgb, var(--deu-panel) 88%, transparent)); box-shadow: 0 20px 56px color-mix(in srgb, var(--deu-ink) 8%, transparent); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);">
+            <div class="flex min-w-0 flex-1 items-center gap-3 sm:flex-initial">
+              <a href="./index.html" class="inline-flex h-11 w-11 flex-none items-center justify-center rounded-full border border-[var(--deu-line-strong)] text-sm font-semibold tracking-[0.18em] text-[var(--deu-primary)] transition-[transform,border-color,background-color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)]" style="background: linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 90%, transparent), color-mix(in srgb, var(--deu-panel) 84%, transparent));" aria-label="Go to home">
+                DI
+              </a>
+              <div class="flex min-w-0 flex-col">
+                <a href="./index.html" class="deu-h3 truncate text-[var(--deu-ink)]">DeuInnovation</a>
+                <span class="truncate text-sm text-[var(--deu-ink-3)]">Studio access</span>
+              </div>
+            </div>
+
+            <div class="ml-auto flex w-full items-center justify-between gap-2 sm:ml-0 sm:w-auto sm:justify-end sm:gap-3">
+              <a href="./index.html" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-[var(--deu-line)] px-3 py-2.5 text-sm font-medium text-[var(--deu-ink-2)] transition-[transform,border-color,color,background-color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-line-strong)] hover:text-[var(--deu-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--deu-primary)] sm:px-4" style="background: color-mix(in srgb, var(--deu-panel) 92%, transparent);">
+                <i data-lucide="arrow-left" class="h-4 w-4"></i>
+                <span class="sm:inline">Home</span>
+              </a>
+
+              <button type="button" class="deu-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">
+                <span class="deu-theme-toggle__track" aria-hidden="true">
+                  <span class="deu-theme-toggle__thumb"></span>
+                  <span class="deu-theme-toggle__glyph deu-theme-toggle__glyph--sun">
+                    <i data-lucide="sun-medium" class="h-3.5 w-3.5"></i>
+                  </span>
+                  <span class="deu-theme-toggle__glyph deu-theme-toggle__glyph--moon">
+                    <i data-lucide="moon-star" class="h-3.5 w-3.5"></i>
+                  </span>
+                </span>
+                <span class="deu-theme-toggle__label" data-theme-label>Light</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="relative overflow-hidden">
+        <div class="deu-auth-aura"></div>
+        <div class="deu-auth-shell relative py-8 sm:py-10 lg:py-14">
+          <div class="grid gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-start lg:gap-8">
+            <div class="deu-auth-rail">
+              <div class="flex flex-col gap-5">
+                <span class="inline-flex items-center justify-center self-start whitespace-nowrap rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] px-4 py-2 text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">
+                  New account
+                </span>
+                <div class="flex flex-col gap-4">
+                  <h1 class="deu-h1 max-w-[11ch] text-[var(--deu-ink)]" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">
+                    Join the DeuInnovation workspace.
+                  </h1>
+                  <p class="deu-body-lg max-w-[35rem] text-[var(--deu-ink-2)]">
+                    Create your account to review projects, track onboarding, and start working inside a calmer studio-grade client environment.
+                  </p>
+                </div>
+              </div>
+
+              <div class="deu-auth-steps" aria-label="Onboarding phases">
+                <article class="deu-step-card">
+                  <span class="deu-step-card__index">01</span>
+                  <div class="flex flex-col gap-2">
+                    <h2 class="deu-h3 text-[var(--deu-ink)]">Profile setup</h2>
+                    <p class="deu-body text-[var(--deu-ink-2)]">Add your name, work email, and studio details so your workspace starts with the right context.</p>
+                  </div>
+                </article>
+                <article class="deu-step-card">
+                  <span class="deu-step-card__index">02</span>
+                  <div class="flex flex-col gap-2">
+                    <h2 class="deu-h3 text-[var(--deu-ink)]">Access secure space</h2>
+                    <p class="deu-body text-[var(--deu-ink-2)]">Set a strong password and prepare your account for project visibility, approvals, and next-step delivery.</p>
+                  </div>
+                </article>
+                <article class="deu-step-card">
+                  <span class="deu-step-card__index">03</span>
+                  <div class="flex flex-col gap-2">
+                    <h2 class="deu-h3 text-[var(--deu-ink)]">Start onboarding</h2>
+                    <p class="deu-body text-[var(--deu-ink-2)]">Receive a guided first session, cleaner communication, and a structured path into the work.</p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="deu-benefits-panel">
+                <div class="flex items-start justify-between gap-4">
+                  <div class="flex flex-col gap-2">
+                    <span class="text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">What you unlock</span>
+                    <h2 class="deu-h3 text-[var(--deu-ink)]">A more considered onboarding flow</h2>
+                  </div>
+                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] text-[var(--deu-primary)]">
+                    <i data-lucide="sparkles" class="h-4 w-4"></i>
+                  </span>
+                </div>
+                <ul class="grid gap-3 text-sm text-[var(--deu-ink)]">
+                  <li class="deu-check-row">
+                    <i data-lucide="check" class="h-4 w-4 text-[var(--deu-primary)]"></i>
+                    <span class="truncate">Structured project visibility from the first login</span>
+                  </li>
+                  <li class="deu-check-row">
+                    <i data-lucide="check" class="h-4 w-4 text-[var(--deu-primary)]"></i>
+                    <span class="truncate">Shared notes, approvals, and milestone handoffs in one place</span>
+                  </li>
+                  <li class="deu-check-row">
+                    <i data-lucide="check" class="h-4 w-4 text-[var(--deu-primary)]"></i>
+                    <span class="truncate">A studio tone that feels premium without adding noise</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="deu-form-stage">
+              <div class="deu-form-shell">
+                <div class="deu-form-shell__topline">
+                  <span class="text-xs uppercase tracking-[0.16em] text-[var(--deu-primary)]">Create account</span>
+                  <span class="whitespace-nowrap text-sm text-[var(--deu-ink-3)]">Approx. 2 minutes</span>
+                </div>
+
+                <div class="deu-segmented-progress" aria-label="Account setup progress">
+                  <span class="deu-segmented-progress__item is-active">Profile</span>
+                  <span class="deu-segmented-progress__item is-active">Access</span>
+                  <span class="deu-segmented-progress__item">Launch</span>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <h2 class="deu-h2 text-[var(--deu-ink)]">Set up your studio access</h2>
+                  <p class="deu-body text-[var(--deu-ink-2)]">
+                    Use your work details so we can prepare the right onboarding path and keep project communication clean from the beginning.
+                  </p>
+                </div>
+
+                <form class="grid gap-5" action="#" method="post">
+                  <div class="grid gap-5">
+                    <label class="deu-field">
+                      <span class="deu-field__label">Full name</span>
+                      <input class="deu-field__control" type="text" name="fullName" autocomplete="name" placeholder="Amina Rahman" required>
+                    </label>
+
+                    <label class="deu-field">
+                      <span class="deu-field__label">Work email</span>
+                      <input class="deu-field__control" type="email" name="email" autocomplete="email" placeholder="amina@studio.com" required>
+                    </label>
+
+                    <label class="deu-field">
+                      <span class="deu-field__label">Company / studio name</span>
+                      <input class="deu-field__control" type="text" name="company" autocomplete="organization" placeholder="Northline Studio" required>
+                    </label>
+
+                    <div class="grid gap-5 md:grid-cols-2">
+                      <label class="deu-field">
+                        <span class="deu-field__label">Password</span>
+                        <input class="deu-field__control" type="password" name="password" autocomplete="new-password" placeholder="Create password" required>
+                      </label>
+
+                      <label class="deu-field">
+                        <span class="deu-field__label">Confirm password</span>
+                        <input class="deu-field__control" type="password" name="confirmPassword" autocomplete="new-password" placeholder="Repeat password" required>
+                      </label>
+                    </div>
+
+                    <div class="deu-password-note">
+                      <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--deu-line)] bg-[var(--deu-panel)] text-[var(--deu-primary)]">
+                        <i data-lucide="shield-check" class="h-4 w-4"></i>
+                      </span>
+                      <div class="grid min-w-0 gap-2">
+                        <p class="text-sm font-medium text-[var(--deu-ink)]">Password guidance</p>
+                        <p class="deu-body text-[var(--deu-ink-2)]">Use at least 10 characters with a mix of upper and lower case letters, numbers, and one symbol.</p>
+                      </div>
+                    </div>
+
+                    <label class="deu-checkbox-row">
+                      <input class="deu-checkbox-row__input" type="checkbox" name="terms" required>
+                      <span class="deu-checkbox-row__box" aria-hidden="true">
+                        <i data-lucide="check" class="h-3.5 w-3.5"></i>
+                      </span>
+                      <span class="min-w-0 text-sm leading-6 text-[var(--deu-ink-2)]">
+                        I agree to the terms and confirm this account will be used for professional communication and project access.
+                      </span>
+                    </label>
+                  </div>
+
+                  <button type="submit" class="deu-primary-action">
+                    Create account
+                    <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                  </button>
+                </form>
+
+                <div class="deu-secondary-strip">
+                  <div class="grid gap-2">
+                    <span class="text-sm font-medium text-[var(--deu-ink)]">Already have an account?</span>
+                    <p class="deu-body text-[var(--deu-ink-2)]">Jump back into your workspace without restarting onboarding.</p>
+                  </div>
+                  <a href="./login.html" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-[var(--deu-line-strong)] bg-[var(--deu-panel)] px-5 py-3 text-sm font-semibold text-[var(--deu-ink)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-[var(--deu-primary)] hover:bg-[var(--deu-panel-strong)] hover:text-[var(--deu-primary-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--deu-primary)]">
+                    Go to login
+                    <i data-lucide="move-right" class="h-4 w-4"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <style>
+      .deu-auth-shell {
+        width: min(var(--deu-max-width), calc(100vw - 2rem));
+        margin-inline: auto;
+      }
+
+      .deu-auth-aura {
+        position: absolute;
+        inset: -8% auto auto 10%;
+        width: min(50rem, 60vw);
+        height: min(50rem, 60vw);
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at 30% 32%, color-mix(in srgb, var(--deu-primary) 16%, transparent) 0%, transparent 58%),
+          radial-gradient(circle at 72% 48%, color-mix(in srgb, var(--deu-flag-red-soft) 96%, transparent) 0%, transparent 68%);
+        filter: blur(42px);
+        opacity: 0.82;
+        pointer-events: none;
+      }
+
+      .deu-auth-rail,
+      .deu-form-stage,
+      .deu-form-shell,
+      .deu-auth-steps,
+      .deu-benefits-panel {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .deu-auth-rail {
+        align-content: start;
+      }
+
+      .deu-form-stage {
+        position: relative;
+      }
+
+      .deu-form-shell,
+      .deu-benefits-panel,
+      .deu-step-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--deu-line);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 78%, transparent), transparent 100%),
+          var(--deu-surface);
+        box-shadow: var(--deu-shadow-1);
+      }
+
+      .deu-form-shell {
+        border-radius: var(--deu-radius-lg);
+        padding: clamp(1.4rem, 2.8vw, 2rem);
+        gap: 1.35rem;
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--deu-primary) 10%, transparent), transparent 42%),
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 78%, transparent), transparent 100%),
+          var(--deu-surface);
+      }
+
+      .deu-form-shell__topline,
+      .deu-secondary-strip,
+      .deu-step-card,
+      .deu-password-note,
+      .deu-check-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        min-width: 0;
+      }
+
+      .deu-segmented-progress {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.6rem;
+        padding: 0.38rem;
+        border: 1px solid var(--deu-line);
+        border-radius: calc(var(--deu-radius-md) + 2px);
+        background: color-mix(in srgb, var(--deu-panel) 88%, transparent);
+      }
+
+      .deu-segmented-progress__item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        white-space: nowrap;
+        border-radius: var(--deu-radius-md);
+        padding: 0.8rem 0.9rem;
+        font-size: 0.76rem;
+        line-height: 1;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--deu-ink-3);
+        border: 1px solid transparent;
+        background: transparent;
+      }
+
+      .deu-segmented-progress__item.is-active {
+        color: var(--deu-primary-ink);
+        border-color: color-mix(in srgb, var(--deu-primary) 44%, var(--deu-line));
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 24%, transparent), color-mix(in srgb, var(--deu-primary) 12%, transparent));
+      }
+
+      .deu-step-card {
+        border-radius: var(--deu-radius-md);
+        padding: 1.05rem 1.05rem 1.15rem;
+        justify-content: flex-start;
+      }
+
+      .deu-step-card__index {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        flex: 0 0 auto;
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, var(--deu-primary) 36%, var(--deu-line));
+        background: color-mix(in srgb, var(--deu-primary) 16%, transparent);
+        color: var(--deu-primary-strong);
+        font-size: 0.78rem;
+        line-height: 1;
+        letter-spacing: 0.16em;
+      }
+
+      .deu-benefits-panel {
+        border-radius: var(--deu-radius-lg);
+        padding: 1.25rem;
+      }
+
+      .deu-check-row {
+        justify-content: flex-start;
+        gap: 0.75rem;
+        font-size: 0.92rem;
+      }
+
+      .deu-field {
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .deu-field__label {
+        font-size: 0.82rem;
+        line-height: 1.4;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--deu-ink-3);
+      }
+
+      .deu-field__control {
+        width: 100%;
+        min-height: 3.7rem;
+        border: 1px solid var(--deu-line);
+        border-radius: var(--deu-radius-md);
+        background: color-mix(in srgb, var(--deu-surface-2) 88%, transparent);
+        padding: 0 1rem;
+        color: var(--deu-ink);
+        font: inherit;
+        outline: none;
+        transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+      }
+
+      .deu-field__control::placeholder {
+        color: var(--deu-ink-3);
+      }
+
+      .deu-field__control:focus {
+        border-color: color-mix(in srgb, var(--deu-primary) 54%, var(--deu-line));
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--deu-primary) 12%, transparent);
+        background: color-mix(in srgb, var(--deu-surface) 96%, transparent);
+      }
+
+      .deu-password-note {
+        justify-content: flex-start;
+        border: 1px solid var(--deu-line);
+        border-radius: var(--deu-radius-md);
+        background: color-mix(in srgb, var(--deu-panel) 90%, transparent);
+        padding: 0.9rem 1rem;
+      }
+
+      .deu-checkbox-row {
+        position: relative;
+        cursor: pointer;
+        justify-content: flex-start;
+        gap: 0.85rem;
+        padding: 0.2rem 0;
+      }
+
+      .deu-checkbox-row__input {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .deu-checkbox-row__box {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.35rem;
+        height: 1.35rem;
+        flex: 0 0 auto;
+        margin-top: 0.2rem;
+        border: 1px solid var(--deu-line-strong);
+        border-radius: var(--deu-radius-sm);
+        background: color-mix(in srgb, var(--deu-surface-2) 86%, transparent);
+        color: transparent;
+        transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+      }
+
+      .deu-checkbox-row__input:focus-visible + .deu-checkbox-row__box {
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--deu-primary) 12%, transparent);
+        border-color: color-mix(in srgb, var(--deu-primary) 54%, var(--deu-line));
+      }
+
+      .deu-checkbox-row__input:checked + .deu-checkbox-row__box {
+        border-color: color-mix(in srgb, var(--deu-primary) 52%, var(--deu-line));
+        background: color-mix(in srgb, var(--deu-primary) 78%, transparent);
+        color: var(--deu-primary-ink);
+      }
+
+      .deu-primary-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        min-height: 3.8rem;
+        width: 100%;
+        white-space: nowrap;
+        border: 0;
+        border-radius: var(--deu-radius-md);
+        background:
+          linear-gradient(180deg, var(--deu-primary-strong), var(--deu-primary));
+        color: var(--deu-primary-ink);
+        font: inherit;
+        font-size: 0.98rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 18px 32px color-mix(in srgb, var(--deu-primary) 18%, transparent);
+        transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+      }
+
+      .deu-primary-action:hover {
+        transform: translateY(-1px);
+        filter: saturate(1.03);
+        box-shadow: 0 20px 36px color-mix(in srgb, var(--deu-primary) 24%, transparent);
+      }
+
+      .deu-primary-action:focus-visible {
+        outline: 2px solid var(--deu-primary);
+        outline-offset: 3px;
+      }
+
+      .deu-secondary-strip {
+        align-items: center;
+        border-top: 1px solid var(--deu-line);
+        padding-top: 1.15rem;
+      }
+
+      .deu-theme-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.72rem;
+        min-width: 0;
+        border: 1px solid var(--deu-line);
+        border-radius: 999px;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-panel-strong) 80%, transparent), transparent 100%),
+          color-mix(in srgb, var(--deu-surface) 90%, transparent);
+        color: var(--deu-ink);
+        box-shadow: var(--deu-shadow-1);
+        padding: 0.32rem 0.4rem 0.32rem 0.34rem;
+        transition: transform 180ms cubic-bezier(.2,.8,.2,1), border-color 180ms cubic-bezier(.2,.8,.2,1), background-color 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .deu-theme-toggle:hover {
+        transform: translateY(-1px);
+        border-color: var(--deu-line-strong);
+      }
+
+      .deu-theme-toggle:focus-visible {
+        outline: 2px solid var(--deu-primary);
+        outline-offset: 2px;
+      }
+
+      .deu-theme-toggle__track {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.9rem;
+        width: 4.3rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--deu-panel-strong) 85%, transparent);
+        border: 1px solid color-mix(in srgb, var(--deu-line-strong) 78%, transparent);
+        padding: 0.22rem 0.4rem;
+      }
+
+      .deu-theme-toggle__thumb {
+        position: absolute;
+        top: 0.18rem;
+        left: 0.2rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 999px;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-primary) 28%, white), var(--deu-primary));
+        box-shadow: 0 10px 22px color-mix(in srgb, var(--deu-primary) 24%, transparent);
+        transition: transform 200ms cubic-bezier(.2,.8,.2,1), background-color 180ms cubic-bezier(.2,.8,.2,1), box-shadow 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .dark .deu-theme-toggle__thumb {
+        transform: translateX(2.15rem);
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--deu-surface-3) 92%, white), var(--deu-surface-2));
+        box-shadow: 0 10px 22px color-mix(in srgb, var(--deu-foreground) 12%, transparent);
+      }
+
+      .deu-theme-toggle__glyph {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--deu-ink-3);
+        transition: color 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .light .deu-theme-toggle__glyph--sun,
+      .dark .deu-theme-toggle__glyph--moon {
+        color: var(--deu-primary-ink);
+      }
+
+      .deu-theme-toggle__label {
+        min-width: 2.85rem;
+        white-space: nowrap;
+        font-size: 0.76rem;
+        line-height: 1;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--deu-ink-2);
+      }
+
+      @media (max-width: 1023px) {
+        .deu-auth-rail {
+          order: 2;
+        }
+
+        .deu-form-stage {
+          order: 1;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .deu-auth-shell {
+          width: min(var(--deu-max-width), calc(100vw - 1.1rem));
+        }
+
+        .deu-form-shell__topline,
+        .deu-secondary-strip {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .deu-segmented-progress {
+          grid-template-columns: 1fr;
+        }
+
+        .deu-theme-toggle {
+          gap: 0.5rem;
+        }
+
+        .deu-theme-toggle__label {
+          min-width: 2.3rem;
+          font-size: 0.7rem;
+          letter-spacing: 0.1em;
+        }
+      }
+
+      @media (max-width: 479px) {
+        .deu-auth-shell {
+          width: min(var(--deu-max-width), calc(100vw - 0.85rem));
+        }
+
+        .deu-step-card {
+          flex-direction: column;
+        }
+
+        .deu-primary-action,
+        .deu-field__control {
+          min-height: 3.5rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .deu-theme-toggle,
+        .deu-theme-toggle__thumb,
+        .deu-theme-toggle__glyph,
+        .deu-field__control,
+        .deu-primary-action,
+        .deu-checkbox-row__box {
+          transition-duration: 0.01ms !important;
+        }
+
+        .deu-theme-toggle:hover,
+        .deu-primary-action:hover {
+          transform: none;
+        }
+      }
+    </style>
+    <script>
+      const themeKey = 'deu-theme';
+      const root = document.documentElement;
+      const themeToggle = document.querySelector('[data-theme-toggle]');
+      const themeLabel = document.querySelector('[data-theme-label]');
+
+      const applyTheme = (theme, options = {}) => {
+        const nextTheme = theme === 'dark' ? 'dark' : 'light';
+        root.classList.remove('light', 'dark');
+        root.classList.add(nextTheme);
+
+        const isDark = nextTheme === 'dark';
+        if (themeToggle) {
+          themeToggle.setAttribute('aria-pressed', String(isDark));
+          themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        if (themeLabel) {
+          themeLabel.textContent = isDark ? 'Dark' : 'Light';
+        }
+
+        if (options.persist) {
+          try {
+            localStorage.setItem(themeKey, nextTheme);
+          } catch (error) {
+          }
+        }
+      };
+
+      let initialTheme = root.classList.contains('dark') ? 'dark' : 'light';
+      try {
+        const storedTheme = localStorage.getItem(themeKey);
+        if (storedTheme === 'light' || storedTheme === 'dark') {
+          initialTheme = storedTheme;
+        }
+      } catch (error) {
+      }
+
+      applyTheme(initialTheme);
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          applyTheme(root.classList.contains('dark') ? 'light' : 'dark', { persist: true });
+        });
+      }
+
+      lucide.createIcons();
+    </script>
+</body>
+</html>

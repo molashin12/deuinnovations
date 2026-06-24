@@ -1,0 +1,29 @@
+{
+  "root": {
+    "id": "root-project",
+    "type": "project",
+    "title": "DeuInnovation Website Concept",
+    "children": [
+      {
+        "id": "page-index",
+        "type": "page",
+        "title": "Home",
+        "htmlSrc": "pages/index.html",
+        "generationPath": [
+          "pages/index.html"
+        ],
+        "children": []
+      },
+      {
+        "id": "page-portfolio",
+        "type": "page",
+        "title": "Portfolio",
+        "htmlSrc": "pages/portfolio.html",
+        "generationPath": [
+          "pages/portfolio.html"
+        ],
+        "children": []
+      }
+    ]
+  }
+}

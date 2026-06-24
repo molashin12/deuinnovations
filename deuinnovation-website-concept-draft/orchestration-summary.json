@@ -1,0 +1,135 @@
+{
+  "project": {
+    "name": "DeuInnovation Website Concept Draft",
+    "slug": "deuinnovation-website-concept-draft",
+    "dashboardMode": false,
+    "designProjectPath": "c:\\Users\\molas\\Documents\\trae_projects\\DeuInnovations\\deuinnovation-website-concept-draft",
+    "generationTree": {
+      "root": {
+        "id": "root-project",
+        "type": "project",
+        "children": [
+          {
+            "id": "page-index",
+            "type": "page",
+            "title": "Home",
+            "htmlSrc": "pages/index.html",
+            "children": []
+          },
+          {
+            "id": "page-portfolio",
+            "type": "page",
+            "title": "Portfolio",
+            "htmlSrc": "pages/portfolio.html",
+            "children": []
+          },
+          {
+            "id": "page-login",
+            "type": "page",
+            "title": "Login",
+            "htmlSrc": "pages/login.html",
+            "children": []
+          },
+          {
+            "id": "page-signup",
+            "type": "page",
+            "title": "Sign Up",
+            "htmlSrc": "pages/signup.html",
+            "children": []
+          }
+        ]
+      }
+    }
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "libraryIdentity": null,
+    "designRead": [
+      "dark-and-light premium studio website",
+      "polished client-work showcase with clearer preview hierarchy",
+      "refined innovation studio presentation with practical browsing"
+    ],
+    "designDials": {
+      "layoutVariance": 5,
+      "motionIntensity": 4,
+      "visualDensity": 3
+    },
+    "styleContinuityAnchors": {
+      "colorSystem": "obsidian and graphite neutrals with a single warm metallic gold brand hue",
+      "colorSystemMode": "shared dark and light system with black-led dark mode and soft off-white light mode",
+      "shapeSystem": "architectural panels with restrained rounded corners and long horizontal lines",
+      "typographySystem": "clean sans serif with display-weight contrast and editorial spacing",
+      "spacingSystem": "broad vertical breathing room with tight internal precision",
+      "componentLanguage": "quiet premium controls, framed cards, floating planes, disciplined chips",
+      "surfaceAndDepth": "dark layered surfaces with subtle glass film, soft lift, and restrained black-led contrast with yellow and red accents",
+      "imageryAndIconography": "no photography, no decorative icon tiles, abstract object-driven hero only",
+      "interactionTone": "deliberate, smooth, reduced, confident"
+    }
+  },
+  "pages": [
+    {
+      "nodeId": "page-index",
+      "title": "Home",
+      "htmlSrc": "pages/index.html",
+      "pageType": "showcase",
+      "language": "en",
+      "visualNorthStar": "A premium innovation studio landing page that feels engineered, multilingual, and future-facing without noise.",
+      "compositionPattern": "Asymmetric two-column with a horizontal portfolio rail",
+      "miniProgramStyle": false,
+      "chartsRequired": false,
+      "qualityRisks": [
+        "hero could become generic if too centered",
+        "horizontal rail must remain elegant on mobile",
+        "multilingual samples must feel intentional rather than mixed-language clutter"
+      ]
+    },
+    {
+      "nodeId": "page-portfolio",
+      "title": "Portfolio",
+      "htmlSrc": "pages/portfolio.html",
+      "pageType": "showcase",
+      "language": "en",
+      "visualNorthStar": "An elegant studio portfolio page with gallery-like composition, restrained contrast, and a refined sense of authorship.",
+      "compositionPattern": "Straightforward showcase rows with framed previews, featured strips, and premium editorial spacing",
+      "miniProgramStyle": false,
+      "chartsRequired": false,
+      "qualityRisks": [
+        "must stay practical and scannable while remaining premium",
+        "preview frames must feel real enough to suggest past work without using photography",
+        "theme toggle must behave consistently with the homepage"
+      ]
+    },
+    {
+      "nodeId": "page-login",
+      "title": "Login",
+      "htmlSrc": "pages/login.html",
+      "pageType": "task-driven",
+      "language": "en",
+      "visualNorthStar": "A premium sign-in screen with calm trust cues, polished form framing, and high-end dark/light adaptability.",
+      "compositionPattern": "Two-part auth stage with trust panel and restrained form card",
+      "miniProgramStyle": false,
+      "chartsRequired": false,
+      "qualityRisks": [
+        "must feel premium without becoming overdesigned",
+        "mobile stacking must preserve hierarchy and comfort",
+        "form fields must feel more crafted than generic SaaS auth"
+      ]
+    },
+    {
+      "nodeId": "page-signup",
+      "title": "Sign Up",
+      "htmlSrc": "pages/signup.html",
+      "pageType": "task-driven",
+      "language": "en",
+      "visualNorthStar": "A refined onboarding screen that makes account creation feel elevated, clear, and credible.",
+      "compositionPattern": "Split auth frame with onboarding rail and richer registration form surface",
+      "miniProgramStyle": false,
+      "chartsRequired": false,
+      "qualityRisks": [
+        "must stay clean despite richer form content",
+        "password guidance and checklist should support rather than clutter",
+        "theme toggle and spacing should remain coherent with the rest of the draft"
+      ]
+    }
+  ]
+}
