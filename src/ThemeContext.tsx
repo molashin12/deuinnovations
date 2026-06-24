@@ -20,8 +20,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } catch (e) {
       // Ignored
     }
-    // Default to light as per concept draft
-    return "light";
+    // Default to dark as main theme of the website
+    return "dark";
   });
 
   const setTheme = (newTheme: Theme) => {

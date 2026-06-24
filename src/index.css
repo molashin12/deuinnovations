@@ -2,37 +2,6 @@
 @import "tailwindcss";
 
 :root,
-.light {
-  --deu-bg: #f2f0ea;
-  --deu-surface: #f6f4ee;
-  --deu-surface-2: #ece8df;
-  --deu-surface-3: #e2ddd2;
-  --deu-panel: rgba(17, 17, 18, 0.035);
-  --deu-panel-strong: rgba(17, 17, 18, 0.06);
-  --deu-ink: #151619;
-  --deu-foreground: #151619;
-  --deu-ink-2: rgba(21, 22, 25, 0.74);
-  --deu-ink-3: rgba(21, 22, 25, 0.44);
-  --deu-line: rgba(21, 22, 25, 0.1);
-  --deu-line-strong: rgba(21, 22, 25, 0.16);
-  --deu-primary: #FFCC00;
-  --deu-primary-strong: #FFD633;
-  --deu-primary-soft: rgba(255, 204, 0, 0.18);
-  --deu-primary-ink: #111112;
-  --deu-flag-red: #DD0000;
-  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
-  --deu-oxblood: #DD0000;
-  --deu-shadow-1: 0 18px 40px rgba(15, 17, 21, 0.07);
-  --deu-shadow-2: 0 30px 70px rgba(15, 17, 21, 0.08);
-  --deu-radius-sm: 4px;
-  --deu-radius-md: 8px;
-  --deu-radius-lg: 16px;
-  --deu-radius-pill: 999px;
-  --deu-max-width: 1360px;
-  --deu-font-body: "Inter", "Segoe UI", Arial, sans-serif;
-  --deu-font-display: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
-}
-
 .dark {
   --deu-bg: #0e0f10;
   --deu-surface: #151618;
@@ -46,12 +15,74 @@
   --deu-ink-3: rgba(246, 242, 232, 0.5);
   --deu-line: rgba(246, 242, 232, 0.1);
   --deu-line-strong: rgba(246, 242, 232, 0.17);
-  --deu-primary: #FFCC00;
-  --deu-primary-strong: #FFE066;
-  --deu-primary-soft: rgba(255, 204, 0, 0.2);
+  --deu-primary: #FBB03B;
+  --deu-primary-strong: #F7931E;
+  --deu-primary-soft: rgba(251, 176, 59, 0.2);
   --deu-primary-ink: #111112;
   --deu-flag-red: #DD0000;
   --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+  --deu-oxblood: #DD0000;
+  --deu-shadow-1: 0 18px 40px rgba(15, 17, 21, 0.5);
+  --deu-shadow-2: 0 30px 70px rgba(15, 17, 21, 0.6);
+  --deu-radius-sm: 4px;
+  --deu-radius-md: 8px;
+  --deu-radius-lg: 16px;
+  --deu-radius-pill: 999px;
+  --deu-max-width: 1360px;
+  --deu-font-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --deu-font-display: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.light {
+  --deu-bg: #f2f0ea;
+  --deu-surface: #f6f4ee;
+  --deu-surface-2: #ece8df;
+  --deu-surface-3: #e2ddd2;
+  --deu-panel: rgba(17, 17, 18, 0.035);
+  --deu-panel-strong: rgba(17, 17, 18, 0.06);
+  --deu-ink: #151619;
+  --deu-foreground: #151619;
+  --deu-ink-2: rgba(21, 22, 25, 0.74);
+  --deu-ink-3: rgba(21, 22, 25, 0.44);
+  --deu-line: rgba(21, 22, 25, 0.1);
+  --deu-line-strong: rgba(21, 22, 25, 0.16);
+  --deu-primary: #FBB03B;
+  --deu-primary-strong: #F7931E;
+  --deu-primary-soft: rgba(251, 176, 59, 0.18);
+  --deu-primary-ink: #111112;
+  --deu-flag-red: #DD0000;
+  --deu-flag-red-soft: rgba(221, 0, 0, 0.14);
+  --deu-shadow-1: 0 18px 40px rgba(15, 17, 21, 0.07);
+  --deu-shadow-2: 0 30px 70px rgba(15, 17, 21, 0.08);
+}
+
+/* Brand Premium text gradient matching the image */
+.text-brand-gradient,
+span[class*="text-[var(--deu-primary)]"],
+p[class*="text-[var(--deu-primary)]"],
+h1[class*="text-[var(--deu-primary)]"],
+h2[class*="text-[var(--deu-primary)]"],
+h3[class*="text-[var(--deu-primary)]"],
+h4[class*="text-[var(--deu-primary)]"],
+a[class*="text-[var(--deu-primary)]"],
+span[class*="text-[var(--deu-primary-strong)]"],
+span.text-brand-yellow,
+h3.text-brand-yellow,
+h4.text-brand-yellow {
+  background: linear-gradient(90deg, #FBB03B 0%, #F15A24 50%, #D4145A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+[class*="text-[var(--deu-primary)]"] > span,
+.text-\[var\(--deu-primary\)\] > span {
+  background: linear-gradient(90deg, #FBB03B 0%, #F15A24 50%, #D4145A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 @theme {

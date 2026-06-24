@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../LanguageContext";
 import { 
   logoutAdmin, 
-  getCurrentUser, 
   getBriefs, 
   updateBriefStatus, 
   getPortfolioProjects, 
   saveProject, 
   deleteProject,
-  isFirebaseConfigured
+  isFirebaseConfigured,
+  subscribeToAuth,
+  seedPortfolioDatabase
 } from "../firebase";
 import type { ProjectBrief, PortfolioProject } from "../firebase";
 import type { User } from "firebase/auth";
@@ -31,25 +32,30 @@ export const Admin: React.FC = () => {
   
   // Auth state
   const [user, setUser] = useState<User | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   // Dashboard state
   const [activeTab, setActiveTab] = useState<"briefs" | "portfolio">("briefs");
   const [briefs, setBriefs] = useState<ProjectBrief[]>([]);
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSeeding, setIsSeeding] = useState(false);
 
   // Portfolio editing state
   const [editingProject, setEditingProject] = useState<Partial<PortfolioProject> | null>(null);
   const [isSavingProject, setIsSavingProject] = useState(false);
+  const [formLang, setFormLang] = useState<"en" | "de" | "ar">("en");
 
   // Check current auth status on mount
   useEffect(() => {
-    const currentUser = getCurrentUser();
-    if (currentUser) {
+    const unsubscribe = subscribeToAuth((currentUser) => {
       setUser(currentUser);
-    } else {
-      navigate("/login");
-    }
+      setIsAuthLoading(false);
+      if (!currentUser) {
+        navigate("/login");
+      }
+    });
+    return () => unsubscribe();
   }, [navigate]);
 
   // Fetch dashboard data once logged in
@@ -135,6 +141,20 @@ export const Admin: React.FC = () => {
     }
   };
 
+  const handleSeedDatabase = async () => {
+    if (!window.confirm("This will populate the Firestore database with 4 default portfolio case studies. Continue?")) return;
+    setIsSeeding(true);
+    try {
+      await seedPortfolioDatabase();
+      await fetchData(); // Reload to show newly seeded projects
+    } catch (err) {
+      console.error("Seeding failed:", err);
+      alert("Seeding failed. Check the console for details.");
+    } finally {
+      setIsSeeding(false);
+    }
+  };
+
   const handleSaveProject = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingProject || !editingProject.id || !editingProject.title) {
@@ -155,10 +175,13 @@ export const Admin: React.FC = () => {
   };
 
   // Render protected loading state
-  if (!user) {
+  if (isAuthLoading || !user) {
     return (
       <div className="flex items-center justify-center min-h-[60vh] text-[var(--deu-ink-3)] font-mono text-xs">
-        AUTHENTICATING...
+        <div className="flex flex-col items-center gap-3">
+          <RefreshCw className="w-5 h-5 animate-spin text-[var(--deu-primary)]" />
+          <span>AUTHENTICATING...</span>
+        </div>
       </div>
     );
   }
@@ -338,7 +361,8 @@ export const Admin: React.FC = () => {
                 {editingProject.title ? t.admin.editProject : t.admin.addProject}
               </h3>
 
-              <div className="grid grid-cols-2 gap-4">
+              {/* General non-translated fields */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">Project ID *</label>
                   <input
@@ -355,245 +379,265 @@ export const Admin: React.FC = () => {
                   <input
                     type="text"
                     required
+                    placeholder="01"
                     value={editingProject.index || ""}
                     onChange={(e) => setEditingProject({ ...editingProject, index: e.target.value })}
                     className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] focus:outline-none"
                   />
                 </div>
-              </div>
-
-              {/* Title Fields */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-[var(--deu-line)] pt-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectTitleEn} *</label>
-                  <input
-                    type="text"
-                    required
-                    value={editingProject.title || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, title: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] focus:outline-none"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectTitleDe}</label>
-                  <input
-                    type="text"
-                    value={editingProject.titleDe || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, titleDe: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectTitleAr}</label>
-                  <input
-                    type="text"
-                    value={editingProject.titleAr || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, titleAr: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
+                <div className="flex flex-col gap-1.5 justify-end pb-2">
+                  <label className="flex items-center gap-2 text-xs font-mono text-[var(--deu-ink)] uppercase cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={editingProject.featured || false}
+                      onChange={(e) => setEditingProject({ ...editingProject, featured: e.target.checked })}
+                      className="accent-[var(--deu-primary)] w-4 h-4 cursor-pointer"
+                    />
+                    <span>Featured (Show on Landing Page Rail)</span>
+                  </label>
                 </div>
               </div>
 
-              {/* Descriptions */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-[var(--deu-line)] pt-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDescEn} *</label>
-                  <textarea
-                    required
-                    rows={3}
-                    value={editingProject.description || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, description: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDescDe}</label>
-                  <textarea
-                    rows={3}
-                    value={editingProject.descriptionDe || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, descriptionDe: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDescAr}</label>
-                  <textarea
-                    rows={3}
-                    value={editingProject.descriptionAr || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, descriptionAr: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
+              {/* Translation tabs selector */}
+              <div className="flex border-b border-[var(--deu-line)] pt-3 gap-2">
+                {(["en", "de", "ar"] as const).map((lang) => (
+                  <button
+                    key={lang}
+                    type="button"
+                    onClick={() => setFormLang(lang)}
+                    className={`px-4 py-2 text-xs font-semibold cursor-pointer border-b-2 transition-all capitalize ${
+                      formLang === lang
+                        ? "border-[var(--deu-primary)] text-[var(--deu-primary)] bg-[var(--deu-panel)]"
+                        : "border-transparent text-[var(--deu-ink-3)] hover:text-[var(--deu-ink)]"
+                    }`}
+                  >
+                    {lang === "en" ? "English" : lang === "de" ? "Deutsch" : "العربية (Arabic)"}
+                  </button>
+                ))}
               </div>
 
-              {/* Roles */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-[var(--deu-line)] pt-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectRoleEn} *</label>
-                  <input
-                    type="text"
-                    required
-                    value={editingProject.role || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, role: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectRoleDe}</label>
-                  <input
-                    type="text"
-                    value={editingProject.roleDe || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, roleDe: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectRoleAr}</label>
-                  <input
-                    type="text"
-                    value={editingProject.roleAr || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, roleAr: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-              </div>
+              {/* Translated fields tab panel */}
+              <div className="flex flex-col gap-4">
+                {formLang === "en" && (
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectTitleEn} *</label>
+                      <input
+                        type="text"
+                        required
+                        value={editingProject.title || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, title: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] focus:outline-none"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectRoleEn} *</label>
+                      <input
+                        type="text"
+                        required
+                        value={editingProject.role || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, role: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectFocusEn} *</label>
+                      <input
+                        type="text"
+                        required
+                        value={editingProject.focus || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, focus: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDescEn} *</label>
+                      <textarea
+                        required
+                        rows={3}
+                        value={editingProject.description || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, description: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectOutcomeEn}</label>
+                      <input
+                        type="text"
+                        value={editingProject.outcome || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, outcome: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDetailsEn}</label>
+                      <textarea
+                        rows={5}
+                        value={editingProject.details || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, details: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] font-sans"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectServicesEn} *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="tag1, tag2, tag3"
+                        value={editingProject.servicesList?.join(", ") || ""}
+                        onChange={(e) => setEditingProject({ 
+                          ...editingProject, 
+                          servicesList: e.target.value.split(",").map((s) => s.trim()).filter(Boolean)
+                        })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                )}
 
-              {/* Focuses */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-[var(--deu-line)] pt-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectFocusEn} *</label>
-                  <input
-                    type="text"
-                    required
-                    value={editingProject.focus || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, focus: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectFocusDe}</label>
-                  <input
-                    type="text"
-                    value={editingProject.focusDe || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, focusDe: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectFocusAr}</label>
-                  <input
-                    type="text"
-                    value={editingProject.focusAr || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, focusAr: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-              </div>
+                {formLang === "de" && (
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectTitleDe} (Optional)</label>
+                      <input
+                        type="text"
+                        value={editingProject.titleDe || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, titleDe: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] focus:outline-none"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectRoleDe} (Optional)</label>
+                      <input
+                        type="text"
+                        value={editingProject.roleDe || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, roleDe: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectFocusDe} (Optional)</label>
+                      <input
+                        type="text"
+                        value={editingProject.focusDe || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, focusDe: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDescDe} (Optional)</label>
+                      <textarea
+                        rows={3}
+                        value={editingProject.descriptionDe || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, descriptionDe: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectOutcomeDe} (Optional)</label>
+                      <input
+                        type="text"
+                        value={editingProject.outcomeDe || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, outcomeDe: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDetailsDe} (Optional)</label>
+                      <textarea
+                        rows={5}
+                        value={editingProject.detailsDe || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, detailsDe: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectServicesDe} (Optional)</label>
+                      <input
+                        type="text"
+                        placeholder="tag1, tag2, tag3"
+                        value={editingProject.servicesListDe?.join(", ") || ""}
+                        onChange={(e) => setEditingProject({ 
+                          ...editingProject, 
+                          servicesListDe: e.target.value.split(",").map((s) => s.trim()).filter(Boolean)
+                        })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
+                      />
+                    </div>
+                  </div>
+                )}
 
-              {/* Outcomes */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-[var(--deu-line)] pt-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectOutcomeEn}</label>
-                  <input
-                    type="text"
-                    value={editingProject.outcome || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, outcome: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectOutcomeDe}</label>
-                  <input
-                    type="text"
-                    value={editingProject.outcomeDe || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, outcomeDe: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectOutcomeAr}</label>
-                  <input
-                    type="text"
-                    value={editingProject.outcomeAr || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, outcomeAr: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-              </div>
-
-              {/* Deep Details Case Text */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-[var(--deu-line)] pt-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDetailsEn}</label>
-                  <textarea
-                    rows={5}
-                    value={editingProject.details || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, details: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] font-sans"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDetailsDe}</label>
-                  <textarea
-                    rows={5}
-                    value={editingProject.detailsDe || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, detailsDe: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDetailsAr}</label>
-                  <textarea
-                    rows={5}
-                    value={editingProject.detailsAr || ""}
-                    onChange={(e) => setEditingProject({ ...editingProject, detailsAr: e.target.value })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-              </div>
-
-              {/* Services Lists (comma separated inputs) */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-[var(--deu-line)] pt-3">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectServicesEn} *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="tag1, tag2, tag3"
-                    value={editingProject.servicesList?.join(", ") || ""}
-                    onChange={(e) => setEditingProject({ 
-                      ...editingProject, 
-                      servicesList: e.target.value.split(",").map((s) => s.trim()).filter(Boolean)
-                    })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] focus:outline-none"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectServicesDe}</label>
-                  <input
-                    type="text"
-                    placeholder="tag1, tag2, tag3"
-                    value={editingProject.servicesListDe?.join(", ") || ""}
-                    onChange={(e) => setEditingProject({ 
-                      ...editingProject, 
-                      servicesListDe: e.target.value.split(",").map((s) => s.trim()).filter(Boolean)
-                    })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectServicesAr}</label>
-                  <input
-                    type="text"
-                    placeholder="tag1, tag2, tag3"
-                    value={editingProject.servicesListAr?.join(", ") || ""}
-                    onChange={(e) => setEditingProject({ 
-                      ...editingProject, 
-                      servicesListAr: e.target.value.split(",").map((s) => s.trim()).filter(Boolean)
-                    })}
-                    className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)]"
-                  />
-                </div>
+                {formLang === "ar" && (
+                  <div className="flex flex-col gap-4" dir="rtl">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectTitleAr} (Optional)</label>
+                      <input
+                        type="text"
+                        value={editingProject.titleAr || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, titleAr: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] focus:outline-none text-right"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectRoleAr} (Optional)</label>
+                      <input
+                        type="text"
+                        value={editingProject.roleAr || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, roleAr: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] text-right"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectFocusAr} (Optional)</label>
+                      <input
+                        type="text"
+                        value={editingProject.focusAr || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, focusAr: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] text-right"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDescAr} (Optional)</label>
+                      <textarea
+                        rows={3}
+                        value={editingProject.descriptionAr || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, descriptionAr: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] text-right"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectOutcomeAr} (Optional)</label>
+                      <input
+                        type="text"
+                        value={editingProject.outcomeAr || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, outcomeAr: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] text-right"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectDetailsAr} (Optional)</label>
+                      <textarea
+                        rows={5}
+                        value={editingProject.detailsAr || ""}
+                        onChange={(e) => setEditingProject({ ...editingProject, detailsAr: e.target.value })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] text-right"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-mono text-[var(--deu-ink-3)] uppercase">{t.admin.projectServicesAr} (Optional)</label>
+                      <input
+                        type="text"
+                        placeholder="tag1, tag2, tag3"
+                        value={editingProject.servicesListAr?.join(", ") || ""}
+                        onChange={(e) => setEditingProject({ 
+                          ...editingProject, 
+                          servicesListAr: e.target.value.split(",").map((s) => s.trim()).filter(Boolean)
+                        })}
+                        className="bg-[var(--deu-surface-2)] border border-[var(--deu-line)] rounded px-3 py-2 text-xs text-[var(--deu-ink)] text-right"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Action Buttons */}
@@ -614,28 +658,69 @@ export const Admin: React.FC = () => {
                 </button>
               </div>
             </form>
-          ) : (
+           ) : (
             /* PORTFOLIO PROJECTS LIST */
             <div className="flex flex-col gap-4">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                 <h3 className="deu-h3 text-[var(--deu-ink)] m-0">Dynamic Case Studies ({projects.length})</h3>
-                <button
-                  onClick={handleAddProjectClick}
-                  className="flex items-center gap-1.5 px-4 py-2 border border-[var(--deu-primary)] rounded-full bg-[var(--deu-primary-soft)] text-xs font-semibold text-[var(--deu-primary-strong)] hover:bg-[var(--deu-primary)] hover:text-black cursor-pointer transition-colors"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>{t.admin.addProject}</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  {projects.length === 0 && (
+                    <button
+                      onClick={handleSeedDatabase}
+                      disabled={isSeeding}
+                      className="flex items-center gap-1.5 px-4 py-2 border border-[var(--deu-flag-green)]/50 rounded-full bg-[var(--deu-flag-green-soft)] text-xs font-semibold text-[var(--deu-flag-green)] hover:border-[var(--deu-flag-green)] cursor-pointer transition-colors disabled:opacity-50"
+                    >
+                      <Archive className="w-4 h-4" />
+                      <span>{isSeeding ? "Seeding..." : "Seed Default Projects"}</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={handleAddProjectClick}
+                    className="flex items-center gap-1.5 px-4 py-2 border border-[var(--deu-primary)] rounded-full bg-[var(--deu-primary-soft)] text-xs font-semibold text-[var(--deu-primary-strong)] hover:bg-[var(--deu-primary)] hover:text-black cursor-pointer transition-colors"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>{t.admin.addProject}</span>
+                  </button>
+                </div>
               </div>
 
               {isLoading ? (
-                <div className="text-center py-12 text-sm text-[var(--deu-ink-3)]">Loading Projects...</div>
+                <div className="text-center py-12 text-sm text-[var(--deu-ink-3)]">
+                  <RefreshCw className="w-5 h-5 animate-spin mx-auto mb-2 text-[var(--deu-primary)]" />
+                  Loading Projects...
+                </div>
+              ) : projects.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-16 px-6 rounded-lg border border-dashed border-[var(--deu-line-strong)] bg-[var(--deu-panel)]">
+                  <Briefcase className="w-10 h-10 text-[var(--deu-ink-3)] mb-4" />
+                  <h4 className="text-sm font-semibold text-[var(--deu-ink)] mb-1">No projects in database</h4>
+                  <p className="text-xs text-[var(--deu-ink-3)] mb-5 text-center max-w-sm">
+                    Your Firestore <code className="text-[var(--deu-primary)]">projects</code> collection is empty. 
+                    Seed it with default case studies or add your own projects manually.
+                  </p>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={handleSeedDatabase}
+                      disabled={isSeeding}
+                      className="flex items-center gap-1.5 px-5 py-2.5 border border-[var(--deu-primary)] rounded bg-[var(--deu-primary)] text-[var(--deu-primary-ink)] font-bold text-xs hover:bg-[var(--deu-primary-strong)] cursor-pointer disabled:opacity-50 transition-colors"
+                    >
+                      <Archive className="w-4 h-4" />
+                      <span>{isSeeding ? "Seeding..." : "Seed 4 Default Projects"}</span>
+                    </button>
+                    <button
+                      onClick={handleAddProjectClick}
+                      className="flex items-center gap-1.5 px-5 py-2.5 border border-[var(--deu-line-strong)] rounded text-xs font-semibold text-[var(--deu-ink)] hover:border-[var(--deu-primary)] hover:text-[var(--deu-primary)] cursor-pointer transition-colors"
+                    >
+                      <Plus className="w-4 h-4" />
+                      <span>Add Manually</span>
+                    </button>
+                  </div>
+                </div>
               ) : (
                 <div className="grid grid-cols-1 gap-3">
                   {projects.map((proj) => (
                     <div 
                       key={proj.id} 
-                      className="p-4 rounded border border-[var(--deu-line)] bg-[var(--deu-surface-2)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-[var(--deu-line-strong)]"
+                      className="p-4 rounded border border-[var(--deu-line)] bg-[var(--deu-surface-2)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-[var(--deu-line-strong)] transition-colors"
                     >
                       <div className="flex items-center gap-4">
                         <span className="deu-project-index select-none">{proj.index}</span>

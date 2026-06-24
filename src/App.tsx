@@ -34,20 +34,30 @@ function AppContent() {
       { threshold: 0.12 }
     );
 
-    const queryAndObserve = () => {
-      document.querySelectorAll(".deu-reveal").forEach((el) => observer.observe(el));
-    };
+    // Initial observation
+    document.querySelectorAll(".deu-reveal").forEach((el) => observer.observe(el));
 
-    queryAndObserve();
-    const t1 = setTimeout(queryAndObserve, 200);
-    const t2 = setTimeout(queryAndObserve, 600);
-    const t3 = setTimeout(queryAndObserve, 1200);
+    // Mutation observer to observe dynamically rendered elements
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "childList") {
+          mutation.addedNodes.forEach((node) => {
+            if (node instanceof HTMLElement) {
+              if (node.classList.contains("deu-reveal")) {
+                observer.observe(node);
+              }
+              node.querySelectorAll(".deu-reveal").forEach((el) => observer.observe(el));
+            }
+          });
+        }
+      });
+    });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
       observer.disconnect();
+      mutationObserver.disconnect();
     };
   }, [location.pathname]);
 
